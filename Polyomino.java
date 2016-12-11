@@ -1,4 +1,5 @@
 import java.util.*;
+import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
@@ -43,7 +44,8 @@ public class Polyomino {
 	}
 
     public static List<Polyomino> openFile() {
-        Path path = Paths.get("/home/thibault/Polyomino/", "polyominoesINF421.txt");
+    	String basePath = new File("").getAbsolutePath();
+        Path path = Paths.get(basePath, "polyominoesINF421.txt");
         Charset charset = Charset.forName("UTF-8");
         List<Polyomino> polyominos = new LinkedList<Polyomino>();
 		try {
