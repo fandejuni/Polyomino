@@ -10,7 +10,7 @@ import java.nio.file.Paths;
 public class Polyomino {
 	
     public Set<Square> squares;
-    static private int width = 20;
+    static private int width = 50;
     static private Color default_color = Color.RED;
 	
     // Creates a Polyomino from text
@@ -44,7 +44,7 @@ public class Polyomino {
 	}
 
     // Returns the smallest rectangle containing the Polyomino
-    public Square[] getDimensions() {
+    public Square[] getCoordinates() {
         int m_x = 10000000;
         int m_y = 10000000;
         int M_x = 0;
@@ -58,14 +58,22 @@ public class Polyomino {
         return new Square[]{new Square(m_x, m_y), new Square(M_x, M_y)};
     }
 
-    public Square getOrigin() {
-        return getDimensions()[0];
+    public Square getDimensions() {
+        Square[] coords = getCoordinates();
+        int width = coords[1].x - coords[0].x;
+        int height = coords[1].y - coords[0].y;
+        return new Square(width, height);
     }
 
-    public void putOrigin(Square center) {
-        Square new_center = getOrigin();
-        new_center.invert();
-        Square offset = Square.add(center, new_center);
+    public Square getOrigin() {
+        return getCoordinates()[0];
+    }
+
+    // Translates the Polyomino in order to make origin its new origin
+    public void putOrigin(Square origin) {
+        Square current_origin = getOrigin();
+        current_origin.invert();
+        Square offset = Square.add(origin, current_origin);
         translation(offset);
     }
  
@@ -147,7 +155,8 @@ public class Polyomino {
 
     // Draw a Polyomino
     public void draw() {
-        Image2d img = new Image2d(800,800);
+        Square dim = getDimensions();
+        Image2d img = new Image2d((dim.x + 2) * width, (dim.y + 2) * width);
         for (Square corner : squares)
 		{
             int x1 = (corner.x + 1) * width;
@@ -165,15 +174,18 @@ public class Polyomino {
     public static void draw(List<Polyomino> l) {
         Set<Square> the_squares = new HashSet<Square>();
         int offset = 0;
+        Square dim = new Square(0, 0);
         for (Polyomino p : l) {
-            Square[] dimensions = p.getDimensions();
+            dim.add(p.getDimensions());
+            dim.add(new Square(1, 1));
+            Square[] dimensions = p.getCoordinates();
             p.translation(new Square(offset, 0));
             for (Square s : p.squares) {
                 the_squares.add(s);
             }
             offset = offset + dimensions[1].x - dimensions[0].x + 2;
         }
-        Image2d img = new Image2d(800,800);
+        Image2d img = new Image2d((dim.x + 2) * width, (dim.y + 2) * width);
         for (Square corner : the_squares)
 		{
             int x1 = (corner.x + 1) * width;
