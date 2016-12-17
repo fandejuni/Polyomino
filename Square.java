@@ -7,9 +7,49 @@ public class Square {
         y = new_y;
     }
 
+    public Square(Square s) {
+        x = s.x;
+        y = s.y;
+    }
+
+    public void reflection_horizontal() {
+        y = -y;
+    }
+    
+    public void reflection_vertical() {
+        x = - x;
+    }
+
+    public void invert() {
+        x = -x;
+        y = -y;
+    }
+
+    public void multiply(Square s) {
+        x = x * s.x;
+        y = y * s.y;
+    }
+
     public void add(Square s) {
         x = x + s.x;
         y = y + s.y;
+    }
+
+    public static Square add(Square a, Square b) {
+        Square s = new Square(a);
+        s.add(b);
+        return s;
+    }
+
+    public void dilate(int lambda) {
+        x = lambda * x;
+        y = lambda * y;
+    } 
+
+    public static Square dilate(int lambda, Square s) {
+        Square a = new Square(s);
+        a.dilate(lambda);
+        return a;
     }
 
     public String toString() {
