@@ -20,14 +20,21 @@ public class Square {
         x = - x;
     }
 
+    public void rotation() {
+        int temp = x;
+        x = -y;
+        y = temp;
+    }
+
+    public void anti_rotation() {
+        int temp = x;
+        x = y;
+        y = -temp;
+    }
+
     public void invert() {
         x = -x;
         y = -y;
-    }
-
-    public void multiply(Square s) {
-        x = x * s.x;
-        y = y * s.y;
     }
 
     public void add(Square s) {

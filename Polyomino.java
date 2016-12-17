@@ -45,8 +45,8 @@ public class Polyomino {
 
     // Returns the smallest rectangle containing the Polyomino
     public Square[] getDimensions() {
-        int m_x = 1000;
-        int m_y = 1000;
+        int m_x = 10000000;
+        int m_y = 10000000;
         int M_x = 0;
         int M_y = 0;
         for (Square s : squares) {
@@ -57,6 +57,18 @@ public class Polyomino {
         }
         return new Square[]{new Square(m_x, m_y), new Square(M_x, M_y)};
     }
+
+    public Square getOrigin() {
+        return getDimensions()[0];
+    }
+
+    public void putOrigin(Square center) {
+        Square new_center = getOrigin();
+        new_center.invert();
+        Square offset = Square.add(center, new_center);
+        translation(offset);
+    }
+ 
 
     // Translates the Polyomino
     public void translation(Square t) {
@@ -80,31 +92,41 @@ public class Polyomino {
 
     // Reflectes the Polyomino with respect to horizontal axis
     public void reflection_horizontal() {
-        Square old_dimensions = getDimensions()[1];
+        Square old_center = getOrigin();
         for (Square s : squares) {
             s.reflection_horizontal();
         }
-        Square new_dimensions = getDimensions()[1];
-        new_dimensions.invert();
-        Square offset = Square.add(old_dimensions, new_dimensions);
-        for (Square s : squares) {
-            s.add(offset);
-        }
-    }
+        putOrigin(old_center);
+   }
         
-   // Reflectes the Polyomino with respect to vertical axis
+    // Reflectes the Polyomino with respect to vertical axis
     public void reflection_vertical() {
-        Square old_dimensions = getDimensions()[1];
+        Square old_center = getOrigin();
         for (Square s : squares) {
             s.reflection_vertical();
         }
-        Square new_dimensions = getDimensions()[1];
-        new_dimensions.invert();
-        Square offset = Square.add(old_dimensions, new_dimensions);
-        for (Square s : squares) {
-            s.add(offset);
-        }
+        putOrigin(old_center);
     }
+
+    // Rotates the Polymino in sens trigo
+    public void rotation() {
+        Square old_center = getOrigin();
+        System.out.println(old_center);
+        for (Square s : squares) {
+            s.rotation();
+        }
+        putOrigin(old_center);
+    }
+
+    // Rotates the Polymino in sens anti-trigo
+    public void anti_rotation() {
+        Square old_center = getOrigin();
+        for (Square s : squares) {
+            s.anti_rotation();
+        }
+        putOrigin(old_center);
+    }
+
 
     // Creates Polyominos from a file
     public static List<Polyomino> openFile() {
