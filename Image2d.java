@@ -95,7 +95,7 @@ class Image2dComponent extends JComponent {
 	}
 }
 
-// Frame for the vizualization
+// Frame for the visualization
 class Image2dViewer extends JFrame {
 
 	private static final long serialVersionUID = -7498525833438154949L;
