@@ -98,7 +98,7 @@ public class Polyomino {
         squares = new_squares;
     }
 
-    // Reflectes the Polyomino with respect to horizontal axis
+    // Reflects the Polyomino with respect to horizontal axis
     public void reflection_horizontal() {
         Square old_center = getOrigin();
         for (Square s : squares) {
@@ -107,7 +107,7 @@ public class Polyomino {
         putOrigin(old_center);
    }
         
-    // Reflectes the Polyomino with respect to vertical axis
+    // Reflects the Polyomino with respect to vertical axis
     public void reflection_vertical() {
         Square old_center = getOrigin();
         for (Square s : squares) {
@@ -116,7 +116,7 @@ public class Polyomino {
         putOrigin(old_center);
     }
 
-    // Rotates the Polymino in sens trigo
+    // Rotates the Polyomino in sens trigo
     public void rotation() {
         Square old_center = getOrigin();
         System.out.println(old_center);
@@ -126,7 +126,7 @@ public class Polyomino {
         putOrigin(old_center);
     }
 
-    // Rotates the Polymino in sens anti-trigo
+    // Rotates the Polyomino in sens anti-trigo
     public void anti_rotation() {
         Square old_center = getOrigin();
         for (Square s : squares) {
@@ -136,7 +136,7 @@ public class Polyomino {
     }
 
 
-    // Creates Polyominos from a file
+    // Creates Polyominoes from a file
     public static List<Polyomino> openFile() {
     	String basePath = new File("").getAbsolutePath();
         Path path = Paths.get(basePath, "polyominoesINF421.txt");
@@ -170,7 +170,7 @@ public class Polyomino {
 		new Image2dViewer(img);
     }
  
-    // Draw polyominoes
+    // Draw Polyominoes
     public static void draw(List<Polyomino> l) {
         Set<Square> the_squares = new HashSet<Square>();
         int offset = 0;
