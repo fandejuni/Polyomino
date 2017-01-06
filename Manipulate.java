@@ -94,11 +94,13 @@ public class Manipulate {
         int offset = 0;
         Square dim = new Square(0, 0);
         for (Polyomino p : l) {
+            Color color = Utilities.randomColor();
             dim.add(p.getDimensions());
             dim.add(new Square(1, 1));
             Square[] dimensions = p.getCoordinates();
             p.translation(new Square(offset, 0));
             for (Square s : p.squares) {
+                s.color = color;
                 the_squares.add(s);
             }
             offset = offset + dimensions[1].x - dimensions[0].x + 2;
@@ -112,7 +114,7 @@ public class Manipulate {
             int y2 = (corner.y + 2) * Polyomino.width;
             int[] the_x = new int[]{x1, x1, x2, x2};
             int[] the_y = new int[]{y1, y2, y2, y1};
-			img.addPolygon(the_x, the_y, Polyomino.default_color);
+			img.addPolygon(the_x, the_y, corner.color);
 		}
 		new Image2dViewer(img);
     }

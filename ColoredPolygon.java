@@ -5,9 +5,9 @@ public class ColoredPolygon {
     public Color color;
     public Polygon polygon;
     
-    public ColoredPolygon(int[] xcoords, int[] ycoords, Color color) {
+    public ColoredPolygon(int[] xcoords, int[] ycoords, Color new_color) {
         int n = xcoords.length;
-        color = color;
+        color = new_color;
         polygon = new Polygon(xcoords, ycoords, n);
     }
 

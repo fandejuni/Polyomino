@@ -1,11 +1,9 @@
 import java.util.*;
-import java.awt.Color;
 
 public class Polyomino {
 	
     public Set<Square> squares;
     static public int width = 15;
-    static public Color default_color = Color.RED;
 
     @Override
     public boolean equals(Object o) {
@@ -217,7 +215,7 @@ public class Polyomino {
             int y2 = (corner.y + 2) * width;
             int[] the_x = new int[]{x1, x1, x2, x2};
             int[] the_y = new int[]{y1, y2, y2, y1};
-			img.addPolygon(the_x, the_y, default_color);
+			img.addPolygon(the_x, the_y, Utilities.randomColor());
 		}
 		new Image2dViewer(img);
     }

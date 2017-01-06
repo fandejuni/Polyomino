@@ -1,6 +1,9 @@
+import java.awt.Color;
+
 public class Square {
     public int x;
     public int y;
+    public Color color;
 
     @Override
 	public boolean equals(Object o) {
@@ -16,7 +19,7 @@ public class Square {
         return 1;
     }
 
-    // Creates a Square from coordinates
+    // Creates a Square from coordinates and color
     public Square(int new_x, int new_y) {
         x = new_x;
         y = new_y;
