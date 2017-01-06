@@ -2,6 +2,20 @@ public class Square {
     public int x;
     public int y;
 
+    @Override
+	public boolean equals(Object o) {
+		if ((o == null) || !(o instanceof Square)) {
+			return false;
+		}
+        Square s = (Square) o;
+		return	x == s.x && y == s.y;
+	}
+
+    @Override
+    public int hashCode() {
+        return 1;
+    }
+
     // Creates a Square from coordinates
     public Square(int new_x, int new_y) {
         x = new_x;
@@ -9,9 +23,8 @@ public class Square {
     }
 
     // Creates a copy of a Square
-    public Square(Square s) {
-        x = s.x;
-        y = s.y;
+    public Square clone() {
+        return new Square(x, y);
     }
 
     // Horizontal mirror
@@ -51,7 +64,7 @@ public class Square {
     }
 
     public static Square add(Square a, Square b) {
-        Square s = new Square(a);
+        Square s = a.clone();
         s.add(b);
         return s;
     }
@@ -63,7 +76,7 @@ public class Square {
     } 
 
     public static Square dilate(int lambda, Square s) {
-        Square a = new Square(s);
+        Square a = s.clone();
         a.dilate(lambda);
         return a;
     }

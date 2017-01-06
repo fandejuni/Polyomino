@@ -1,18 +1,42 @@
 import java.util.*;
 import java.awt.Color;
-import java.io.File;
-import java.io.IOException;
-import java.nio.charset.Charset;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 public class Polyomino {
 	
     public Set<Square> squares;
-    static private int width = 50;
-    static private Color default_color = Color.RED;
-	
+    static public int width = 50;
+    static public Color default_color = Color.RED;
+
+    @Override
+    public boolean equals(Object o) {
+        
+        if (o == this) return true;
+        if (!(o instanceof Polyomino)) {
+            return false;
+        }
+        Polyomino s = (Polyomino) o;
+		return squares.equals(s.squares);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = 17;
+        result = 31 * squares.hashCode();
+        return result;
+    }
+
+    private void log(String s) {
+        System.out.println(s);
+    }
+
+    public Polyomino() {
+        squares = new HashSet<Square>();
+    }
+
+    public Polyomino(Set<Square> carres) {
+        squares = carres;
+    }
+
     // Creates a Polyomino from text
 	public Polyomino(String s) {
         squares = new HashSet<Square>();
@@ -42,6 +66,14 @@ public class Polyomino {
             i++;
         }
 	}
+    
+    public Polyomino clone() {
+        Set<Square> new_squares = new HashSet<Square>();
+        for (Square s : squares) {
+            new_squares.add(s.clone());
+        }
+        return new Polyomino(new_squares);
+    }
 
     // Returns the smallest rectangle containing the Polyomino
     public Square[] getCoordinates() {
@@ -77,6 +109,10 @@ public class Polyomino {
         translation(offset);
     }
  
+    // Translates the Polyomino to the left and to the top, until possible
+    public void canonicalForm() {
+        putOrigin(new Square(0, 0));
+    }
 
     // Translates the Polyomino
     public void translation(Square t) {
@@ -135,22 +171,39 @@ public class Polyomino {
         putOrigin(old_center);
     }
 
+    public boolean isConnected() {
 
-    // Creates Polyominoes from a file
-    public static List<Polyomino> openFile() {
-    	String basePath = new File("").getAbsolutePath();
-        Path path = Paths.get(basePath, "polyominoesINF421.txt");
-        Charset charset = Charset.forName("UTF-8");
-        List<Polyomino> polyominos = new LinkedList<Polyomino>();
-		try {
-			List<String> lines = Files.readAllLines(path, charset);
-			for (String line : lines) {
-				polyominos.add(new Polyomino(line));
-			}
-		} catch (IOException e) {
-			System.out.println(e);
-		}
-        return polyominos;
+        if (squares.size() == 0) {
+            return false;
+        }
+        else {
+
+            Set<Square> vus = new HashSet<Square>();
+            LinkedList<Square> a_voir = new LinkedList<Square>();
+            Square first = squares.iterator().next();
+            a_voir.add(first);
+            vus.add(first);
+
+            while (!a_voir.isEmpty()) {
+
+                Square s = a_voir.pop();
+
+                List<Square> directions = new LinkedList<Square>();
+                directions.add(new Square(1, 0));
+                directions.add(new Square(-1, 0));
+                directions.add(new Square(0, 1));
+                directions.add(new Square(0, -1));
+
+                for (Square d : directions) {
+                    d.add(s); 
+                    if (!vus.contains(d) && squares.contains(d)) {
+                        a_voir.add(d);
+                        vus.add(d);
+                    }
+                }
+            }
+            return (squares.size() == vus.size());
+        }
     }
 
     // Draw a Polyomino
@@ -170,35 +223,6 @@ public class Polyomino {
 		new Image2dViewer(img);
     }
  
-    // Draw Polyominoes
-    public static void draw(List<Polyomino> l) {
-        Set<Square> the_squares = new HashSet<Square>();
-        int offset = 0;
-        Square dim = new Square(0, 0);
-        for (Polyomino p : l) {
-            dim.add(p.getDimensions());
-            dim.add(new Square(1, 1));
-            Square[] dimensions = p.getCoordinates();
-            p.translation(new Square(offset, 0));
-            for (Square s : p.squares) {
-                the_squares.add(s);
-            }
-            offset = offset + dimensions[1].x - dimensions[0].x + 2;
-        }
-        Image2d img = new Image2d((dim.x + 2) * width, (dim.y + 2) * width);
-        for (Square corner : the_squares)
-		{
-            int x1 = (corner.x + 1) * width;
-            int x2 = (corner.x + 2) * width;
-            int y1 = (corner.y + 1) * width;
-            int y2 = (corner.y + 2) * width;
-            int[] the_x = new int[]{x1, x1, x2, x2};
-            int[] the_y = new int[]{y1, y2, y2, y1};
-			img.addPolygon(the_x, the_y, default_color);
-		}
-		new Image2dViewer(img);
-    }
-
 	public String toString() {
 		return squares.toString();
 	}
