@@ -10,11 +10,36 @@ import java.nio.file.Paths;
 public class Manipulate {
 
     private static void log(String s) {
-        System.out.println(s);
+        System.out.println("Manipulate: " + s);
     }
 
+    // Generates all free polyominoes in a given area
+    public static List<Polyomino> generateAllFreePolyominoes(int width, int height) {
+        List<Polyomino> fixed = generateAllFixedPolyominoes(width, height);
+        Set<Polyomino> free = new HashSet<Polyomino>();
+        
+        for (Polyomino p : fixed) {
+            Polyomino current = p;
+            boolean in = false;
+            for (int i = 0; i < 4; i++) {
+                in = in || free.contains(current);
+                current.rotation();
+            }
+            current.reflection_vertical();
+            for (int i = 0; i < 4; i++) {
+                in = in || free.contains(current);
+                current.rotation();
+            }
+            if (!in) {
+                free.add(p);
+            }
+        }
+        return new LinkedList<Polyomino>(free);
+    }
+        
+
     // Generates all fixed polyominoes in a given area
-    public static List<Polyomino> generateAllPolyominoes(int width, int height) {
+    public static List<Polyomino> generateAllFixedPolyominoes(int width, int height) {
         
         // First : we generate every possible set of squares
         LinkedList<Polyomino> all = new LinkedList<Polyomino>();
@@ -42,11 +67,6 @@ public class Manipulate {
                
            }
         }
-
-        // Third : we translate the polyominos in canonical forms
-
-        System.out.println(checked);
-        System.out.println(checked.size());
 
         return new LinkedList<Polyomino>(checked);
     }

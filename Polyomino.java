@@ -4,7 +4,7 @@ import java.awt.Color;
 public class Polyomino {
 	
     public Set<Square> squares;
-    static public int width = 50;
+    static public int width = 15;
     static public Color default_color = Color.RED;
 
     @Override
@@ -26,7 +26,7 @@ public class Polyomino {
     }
 
     private void log(String s) {
-        System.out.println(s);
+        System.out.println("Polyomino: " + s);
     }
 
     public Polyomino() {
@@ -155,7 +155,6 @@ public class Polyomino {
     // Rotates the Polyomino in sens trigo
     public void rotation() {
         Square old_center = getOrigin();
-        System.out.println(old_center);
         for (Square s : squares) {
             s.rotation();
         }

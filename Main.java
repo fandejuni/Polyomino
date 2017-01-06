@@ -11,10 +11,9 @@ class Main {
             p.reflection_horizontal();
         }
 //        Polyomino.draw(l);
-        List<Polyomino> all = Manipulate.generateAllPolyominoes(3,2);
-        for (Polyomino p : all) {
-            p.draw();
-            int n = 1;
-        }
+        List<Polyomino> all = Manipulate.generateAllFreePolyominoes(3,3);
+        System.out.println(all);
+        System.out.println(all.size());
+        Manipulate.draw(all);
     }
 }
