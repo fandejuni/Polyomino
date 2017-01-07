@@ -11,9 +11,16 @@ class Main {
             p.reflection_horizontal();
         }
 //        Polyomino.draw(l);
-        List<Polyomino> all = Manipulate.generateAllFreePolyominoes(3,3);
-        System.out.println(all);
-        System.out.println(all.size());
-        Manipulate.draw(all);
+        List<List<Polyomino>> tout = new LinkedList<List<Polyomino>>();
+        tout.add(Manipulate.allFixedRedeimer(5));
+        tout.add(Manipulate.generateAllFreePolyominoes(3,3));
+        for (List<Polyomino> all : tout) {
+            for (Polyomino p: all) {
+                p.canonicalForm();
+            }
+            System.out.println(all);
+            System.out.println(all.size());
+            Manipulate.draw(all);
+        }
     }
 }

@@ -185,18 +185,11 @@ public class Polyomino {
 
                 Square s = a_voir.pop();
 
-                List<Square> directions = new LinkedList<Square>();
-                directions.add(new Square(1, 0));
-                directions.add(new Square(-1, 0));
-                directions.add(new Square(0, 1));
-                directions.add(new Square(0, -1));
+                List<Square> voisins = Utilities.getNeighbours(s, squares, vus);
 
-                for (Square d : directions) {
-                    d.add(s); 
-                    if (!vus.contains(d) && squares.contains(d)) {
-                        a_voir.add(d);
-                        vus.add(d);
-                    }
+                for (Square v : voisins) {
+                    a_voir.add(v);
+                    vus.add(v);
                 }
             }
             return (squares.size() == vus.size());

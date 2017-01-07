@@ -13,6 +13,46 @@ public class Manipulate {
         System.out.println("Manipulate: " + s);
     }
 
+    // Generates all fixed polyominoes following Redeimer's method
+    public static List<Polyomino> allFixedRedeimer(int P) {
+        Set<Square> vus = new HashSet<Square>();
+        LinkedList<Square> untried = new LinkedList<Square>();
+        
+        Square origin = new Square(0, 0);
+        untried.add(origin);
+        vus.add(origin);
+        List<Polyomino> l = new LinkedList<Polyomino>();
+        return auxFixedRedeimer(P, new Polyomino(), untried, vus, l);
+    }
+    
+    private static List<Polyomino> auxFixedRedeimer(int P, Polyomino parent, LinkedList<Square> untried, Set<Square> vus, List<Polyomino> l) {
+
+        while (!untried.isEmpty()) {
+
+            Square point = untried.pop();
+
+            parent.squares.add(point);
+            l.add(parent.clone());
+
+            if (parent.squares.size() < P) {
+               List<Square> voisins = Utilities.getNeighbours(point, new HashSet<Square>(), vus);
+               for (Square v : voisins) {
+                   untried.add(v);
+                   vus.add(v);
+               }
+               Set<Square> copy_vus = new HashSet<Square>(vus);
+               LinkedList<Square> copy_untried = (LinkedList<Square>) untried.clone();
+               auxFixedRedeimer(P, parent, copy_untried, copy_vus, l);
+               for (Square v : voisins) {
+                   untried.remove(v);
+               }
+            }
+
+            parent.squares.remove(point);
+        }
+        return l;
+    }
+
     // Generates all free polyominoes in a given area
     public static List<Polyomino> generateAllFreePolyominoes(int width, int height) {
         List<Polyomino> fixed = generateAllFixedPolyominoes(width, height);
@@ -36,7 +76,6 @@ public class Manipulate {
         }
         return new LinkedList<Polyomino>(free);
     }
-        
 
     // Generates all fixed polyominoes in a given area
     public static List<Polyomino> generateAllFixedPolyominoes(int width, int height) {
