@@ -21,7 +21,9 @@ public class ExactCover {
                             }
                         }
                     }
-                    for (List<Integer> P : resolve(X_star, C_star)) {
+                    List<List<Integer>> r = resolve(X_star, C_star);
+                    System.out.println(r);
+                    for (List<Integer> P : r) {
                         P.addAll(S);
                         l.add(P);
                     }

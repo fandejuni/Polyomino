@@ -25,8 +25,17 @@ class Main {
 
         Set<Integer> X = new HashSet<Integer>();
         List<List<Integer>> C = new LinkedList<List<Integer>>();
+        for (int i = 1; i < 7; i++) {
+            X.add(new Integer(i));
+        }
 
+        C.add(new LinkedList<Integer>(Arrays.asList(3, 5, 6)));
+        C.add(new LinkedList<Integer>(Arrays.asList(1, 4, 7)));
+        C.add(new LinkedList<Integer>(Arrays.asList(2, 3, 6)));
+        C.add(new LinkedList<Integer>(Arrays.asList(1, 4)));
+        C.add(new LinkedList<Integer>(Arrays.asList(2, 7)));
+        C.add(new LinkedList<Integer>(Arrays.asList(4, 5, 7)));
 
-        
+        System.out.println(ExactCover.resolve(X, C));
     }
 }
