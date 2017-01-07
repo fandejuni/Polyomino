@@ -129,22 +129,39 @@ public class Manipulate {
 
     // Draw Polyominoes
     public static void draw(List<Polyomino> l) {
+    	Collections.sort(l, new Comparator<Polyomino>(){
+
+    		  public int compare(Polyomino p1, Polyomino p2){
+
+    		    return p1.getDimensions().y-p2.getDimensions().y;
+
+    		  }
+
+    		});
         Set<Square> the_squares = new HashSet<Square>();
-        int offset = 0;
-        Square dim = new Square(0, 0);
+        int offsetH = 0;
+        int offsetV = 0;
+        int max = 0;
+        int current;
+        int xmax = 50;
         for (Polyomino p : l) {
+        	current = p.getDimensions().y;
+        	if (current > max) {max = current;}
             Color color = Utilities.randomColor();
-            dim.add(p.getDimensions());
-            dim.add(new Square(1, 1));
             Square[] dimensions = p.getCoordinates();
-            p.translation(new Square(offset, 0));
+            if (offsetH + p.getDimensions().x + 2 > xmax) {
+            	offsetH = 0;
+            	offsetV += max + 2;
+            	max = 0;
+            }
+            p.translation(new Square(offsetH, offsetV));
             for (Square s : p.squares) {
                 s.color = color;
                 the_squares.add(s);
             }
-            offset = offset + dimensions[1].x - dimensions[0].x + 2;
+            offsetH += dimensions[1].x - dimensions[0].x + 2;
         }
-        Image2d img = new Image2d((dim.x + 2) * Polyomino.width, (dim.y + 2) * Polyomino.width);
+        Image2d img = new Image2d(1000, 500);
         for (Square corner : the_squares)
 		{
             int x1 = (corner.x + 1) * Polyomino.width;
