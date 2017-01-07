@@ -12,15 +12,15 @@ class Main {
         }
 //        Polyomino.draw(l);
         List<List<Polyomino>> tout = new LinkedList<List<Polyomino>>();
-        tout.add(Manipulate.allFixedRedeimer(5));
-        tout.add(Manipulate.generateAllFreePolyominoes(3,3));
+        tout.add(Manipulate.allFixedRedeimer(6));
+        tout.add(Manipulate.generateAllFreePolyominoes(4,3));
         for (List<Polyomino> all : tout) {
             for (Polyomino p: all) {
                 p.canonicalForm();
             }
             System.out.println(all);
             System.out.println(all.size());
-            //Manipulate.draw(all);
+            Manipulate.draw(all);
         }
 
         Set<Integer> X = new HashSet<Integer>();
@@ -39,5 +39,8 @@ class Main {
         C.add(new LinkedList<Integer>(Arrays.asList(4, 5, 7)));
 
         System.out.println(ExactCover.resolve(X, C));
+        X.add(8);
+
+        System.out.println(ExactCover.resolve(X, ExactCover.generate(1, 9, 2)));
     }
 }

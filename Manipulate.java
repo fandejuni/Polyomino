@@ -143,7 +143,7 @@ public class Manipulate {
         int offsetV = 0;
         int max = 0;
         int current;
-        int xmax = 50;
+        int xmax = 75;
         for (Polyomino p : l) {
         	current = p.getDimensions().y;
         	if (current > max) {max = current;}
