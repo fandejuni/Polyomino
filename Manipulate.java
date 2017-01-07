@@ -96,7 +96,7 @@ public class Manipulate {
             }
         }
 
-        // Second : we check wether it's connected or not
+        // Second : we check whether it's connected or not
         // Plus, we put them in canonical forms, and add them in a set
         Set<Polyomino> checked = new HashSet<Polyomino>();
         for (Polyomino p : all) {
