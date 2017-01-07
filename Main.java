@@ -20,11 +20,14 @@ class Main {
             }
             System.out.println(all);
             System.out.println(all.size());
-            Manipulate.draw(all);
+            //Manipulate.draw(all);
         }
 
         Set<Integer> X = new HashSet<Integer>();
         List<List<Integer>> C = new LinkedList<List<Integer>>();
+        
+        
+        System.out.println(ExactCover.generate(1,5,2));
 
 
         
