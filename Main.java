@@ -22,5 +22,6 @@ class Main {
             System.out.println(all.size());
             Manipulate.draw(all);
         }
+        
     }
 }
