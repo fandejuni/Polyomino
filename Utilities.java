@@ -3,6 +3,14 @@ import java.util.*;
 
 public class Utilities {
 
+    public static Color randomColor() {
+        Random generator = new Random();
+        float r = generator.nextFloat();
+        float g = generator.nextFloat();
+        float b = generator.nextFloat();
+        return new Color(r, g, b);
+    }
+
     private static List<Square> getDirections() {
         List<Square> directions = new LinkedList<Square>();
         directions.add(new Square(1, 0));
@@ -12,18 +20,10 @@ public class Utilities {
         return directions;
     }
 
-    public static Color randomColor() {
-        Random generator = new Random();
-        float r = generator.nextFloat();
-        float g = generator.nextFloat();
-        float b = generator.nextFloat();
-        return new Color(r, g, b);
-    }
-
     // pos is valid if in possible or if x, y >= 0 if possible is empty
     private static boolean isValid(Square pos, Set<Square> possible) {
         if (possible.isEmpty()) {
-            return pos.x >= 0 && pos.y >= 0;
+            return pos.x >= 0 && (pos.y >= 0 || pos.x > 0);
         }
         else {
             return possible.contains(pos);
