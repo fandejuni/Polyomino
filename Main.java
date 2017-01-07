@@ -20,7 +20,7 @@ class Main {
             }
             System.out.println(all);
             System.out.println(all.size());
-            //Manipulate.draw(all);
+            Manipulate.draw(all);
         }
 
         Set<Integer> X = new HashSet<Integer>();
