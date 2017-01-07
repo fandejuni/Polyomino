@@ -20,7 +20,7 @@ class Main {
             }
             System.out.println(all);
             System.out.println(all.size());
-            Manipulate.draw(all);
+            //Manipulate.draw(all);
         }
 
         Set<Integer> X = new HashSet<Integer>();
@@ -28,6 +28,8 @@ class Main {
         for (int i = 1; i < 7; i++) {
             X.add(new Integer(i));
         }
+        
+        System.out.println(ExactCover.generate(1,5,2));
 
         C.add(new LinkedList<Integer>(Arrays.asList(3, 5, 6)));
         C.add(new LinkedList<Integer>(Arrays.asList(1, 4, 7)));
