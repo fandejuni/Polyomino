@@ -12,8 +12,10 @@ class Main {
         }
 //        Polyomino.draw(l);
         List<List<Polyomino>> tout = new LinkedList<List<Polyomino>>();
-        //tout.add(Manipulate.allFixedRedeimer(6));
-        tout.add(Manipulate.generateAllFreePolyominoes(4,4));
+        //tout.add(Manipulate.generateAllFreePolyominoes(4,3));
+        tout.add(Manipulate.allFixedRedeimer(5));
+        //tout.add(Manipulate.HI(7));
+        //tout.add(Manipulate.VI(7));
         for (List<Polyomino> all : tout) {
             for (Polyomino p: all) {
                 p.canonicalForm();
@@ -37,10 +39,5 @@ class Main {
         C.add(new LinkedList<Integer>(Arrays.asList(1, 4)));
         C.add(new LinkedList<Integer>(Arrays.asList(2, 7)));
         C.add(new LinkedList<Integer>(Arrays.asList(4, 5, 7)));
-
-        System.out.println(ExactCover.resolve(X, C));
-        X.add(8);
-
-        System.out.println(ExactCover.resolve(X, ExactCover.generate(1, 9, 2)));
     }
 }
