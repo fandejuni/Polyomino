@@ -2,15 +2,7 @@ import java.util.*;
 
 class Main {
     public static void main(String[] args) {
-//        Polyomino P = new Polyomino("[(0,0), (0,1), (0,2), (0,3), (0,4), (1,2), (1,3), (2,1), (2,2), (3,0), (3,1), (3,2), (3,3), (3,4)]");
-//        P.dilation(3);
-//        P.rotation();
-//        P.draw();
-        List<Polyomino> l = Manipulate.openFile();
-        for (Polyomino p : l) {
-            p.reflection_horizontal();
-        }
-        //Polyomino.draw(l);
+
         List<List<Polyomino>> tout = new LinkedList<List<Polyomino>>();
 
 /*        tout.add(Manipulate.generateAllFixedPolyominoes(4, 3));
@@ -24,6 +16,7 @@ class Main {
         tout.add(Manipulate.generic(13, "R"));
         tout.add(Manipulate.generic(25, "R2"));*/
 
+<<<<<<< HEAD
         for (List<Polyomino> all : tout) {
             for (Polyomino p: all) {
                 p.canonicalForm();
@@ -61,5 +54,16 @@ class Main {
 		
 		ColumnObject H = DancingLinks.toDancingLinks(conf);
 		System.out.println(DancingLinks.exactCover(H));
+=======
+        Test.testBasePolyomino();
+        Test.testGenerator(tout);
+        Test.exactCover1();
+        Test.exactCover2();
+        Test.exactCover3();
+        Test.tiling1();
+        Test.tiling2();
+        Test.tiling3();
+
+>>>>>>> bae44b5e6d2070584a9522355253fd2ab4044fe5
     }
 }

@@ -19,6 +19,17 @@ public class Manipulate {
         return new LinkedList<Polyomino>(l);
     }
    
+    public static List<Polyomino> fixed(int p) {
+        List<Polyomino> l = new LinkedList<Polyomino>();
+        List<Polyomino> r = generic(p, "Fixed");
+        for (Polyomino  x : r) {
+            if (x.squares.size() == p) {
+                l.add(x);
+            }
+        }
+        return l;
+    }
+
     // s can be "HI", "VI", "Fixed", "A", "D"
     public static List<Polyomino> generic(int P, String s) {
         Set<Square> vus = new HashSet<Square>();
@@ -177,6 +188,31 @@ public class Manipulate {
 		}
         return polyominos;
     }
+    
+    // Draw exactly
+    public static void draw_exactly(List<Polyomino> l, int width) {
+        Set<Square> the_squares = new HashSet<Square>();
+        for (Polyomino p : l) {
+            Color color = Utilities.randomColor();
+            for (Square s : p.squares) {
+                s.color = color;
+                the_squares.add(s);
+            }
+        }
+        Image2d img = new Image2d(1920, 1080);
+        for (Square corner : the_squares)
+		{
+            int x1 = (corner.x + 1) * width;
+            int x2 = (corner.x + 2) * width;
+            int y1 = (corner.y + 1) * width;
+            int y2 = (corner.y + 2) * width;
+            int[] the_x = new int[]{x1, x1, x2, x2};
+            int[] the_y = new int[]{y1, y2, y2, y1};
+			img.addPolygon(the_x, the_y, corner.color);
+		}
+		new Image2dViewer(img);
+    }
+
 
     // Draw Polyominoes
     public static void draw(List<Polyomino> l) {

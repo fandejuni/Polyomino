@@ -5,6 +5,34 @@ public class Polyomino {
     public Set<Square> squares;
     static public int width = 10;
 
+    public List<Polyomino> turnAround() {
+
+        Set<Polyomino> l = new HashSet<Polyomino>();
+        l.add(clone());
+
+        rotation();
+        l.add(clone());
+        rotation();
+        l.add(clone());
+        rotation();
+        l.add(clone());
+        rotation();
+
+        reflection_vertical();
+
+        l.add(clone());
+        rotation();
+        l.add(clone());
+        rotation();
+        l.add(clone());
+        rotation();
+        l.add(clone());
+        rotation();
+
+        reflection_vertical();
+        return new LinkedList<Polyomino>(l);
+    }
+
     @Override
     public boolean equals(Object o) {
         
@@ -86,6 +114,14 @@ public class Polyomino {
         }
         return new Polyomino(new_squares);
     }
+
+	public boolean includes(Polyomino small) {
+		boolean b = true;
+		for (Square x : small.squares) {
+			b = b && squares.contains(x);
+		}
+		return b;
+	}   
 
     // Returns the smallest rectangle containing the Polyomino
     public Square[] getCoordinates() {
