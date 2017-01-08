@@ -111,19 +111,14 @@ public class Manipulate {
         System.out.println("Manipulate: " + s);
     }
     
-    public static List<Polyomino> N(int p) {
-        List<Polyomino> l = new LinkedList<Polyomino>();
-        // TODO
-        return l;
-    }
-
     public static List<Polyomino> HX_VX(int p) {
         List<Polyomino> l = new LinkedList<Polyomino>();
         if (p % 2 == 1) {
             return l;
         }
         else {
-            List<Polyomino> N = N(p/2);
+            List<Polyomino> N = allFixedRedeimer(p/2);
+            System.out.println(N.size());
             for (Polyomino n : N) {
                 Polyomino x = n.clone();
                 Polyomino y = n.clone();

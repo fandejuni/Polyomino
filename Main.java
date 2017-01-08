@@ -13,7 +13,8 @@ class Main {
         //Polyomino.draw(l);
         List<List<Polyomino>> tout = new LinkedList<List<Polyomino>>();
         //tout.add(Manipulate.generateAllFreePolyominoes(4,3));
-        tout.add(Manipulate.allFixedRedeimer(12));
+        //tout.add(Manipulate.allFixedRedeimer(9));
+        tout.add(Manipulate.HX_VX(6));
         //tout.add(Manipulate.HI(7));
         //tout.add(Manipulate.VI(7));
         for (List<Polyomino> all : tout) {
@@ -22,7 +23,7 @@ class Main {
             }
             System.out.println(all);
             System.out.println(all.size());
-            //Manipulate.draw(all);
+            Manipulate.draw(all);
         }
 
         Set<Integer> X = new HashSet<Integer>();

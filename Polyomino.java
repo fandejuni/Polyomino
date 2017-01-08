@@ -173,7 +173,7 @@ public class Polyomino {
         Set<Square> new_squares = new HashSet<Square>(); 
         for (Square s : squares) {
             Square x = s.clone();
-            x.reflection_vertical();
+            x.double_vertical();
             new_squares.add(x);
         }
         squares.addAll(new_squares);
@@ -183,7 +183,7 @@ public class Polyomino {
         Set<Square> new_squares = new HashSet<Square>(); 
         for (Square s : squares) {
             Square x = s.clone();
-            x.reflection_horizontal();
+            x.double_horizontal();
             new_squares.add(x);
         }
         squares.addAll(new_squares);
