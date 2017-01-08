@@ -9,8 +9,26 @@ public class ExactCover {
 		if (n==0) {l.add(new LinkedList<Integer>());}
 		else {
 			int m = M[0].length;
-			if (m==0) {l.add(new LinkedList<Integer>());}
+			int[][] A = new int[n][m];
+			for (int i = 0; i < m; i++) {
+				for (int j = 0; j < n; j++) {
+					A[i][j] = 0;
+				}
+			}
+			if (m==0 || M.equals(A)) {l.add(new LinkedList<Integer>());}
 			else {
+				int a = 0;
+				int b = 0;
+				while (M[a][b]!=1) {
+					if (a==m-1) {
+						b++;
+						a=0;
+					}
+					else {
+						a++;
+					}
+				}
+				int x = b;	
 				for (int i = 0; i < m; i++) {
 					if (M[i][x]==1) {
 						List<Integer> S = new LinkedList<Integer>();
