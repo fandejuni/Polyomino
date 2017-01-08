@@ -13,7 +13,21 @@ public class Polyomino {
             return false;
         }
         Polyomino s = (Polyomino) o;
-		return squares.equals(s.squares);
+        
+        Square old_p = getOrigin();
+        Square old_p1 = s.getOrigin();
+
+        Square origin = new Square(0, 0);
+
+        putOrigin(origin);
+        s.putOrigin(origin);
+
+        boolean b = squares.equals(s.squares);
+
+        putOrigin(old_p);
+        s.putOrigin(old_p1);
+
+		return b;
     }
 
     @Override
