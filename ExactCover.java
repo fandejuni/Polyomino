@@ -21,7 +21,7 @@ public class ExactCover {
 				if (n==0) {l.add(new LinkedList<Integer>());}
 			}
 			else {
-				int a = 0;
+				/*int a = 0; // x is the index of the column of the first 1 which appears in M 
 				int b = 0;
 				while (M[a][b]!=1) {
 					if (b==n-1) {
@@ -32,7 +32,20 @@ public class ExactCover {
 						b++;
 					}
 				}
-				int x = b;	
+				int x = b;	*/ 
+				int x = 0; // x minimizes the number of sets S containing x
+				int min = m;
+				for (int j = 0; j < n; j++) {
+					int current = 0;
+					for (int i = 0; i < m; i++) {
+						current += M[i][j];
+					}
+					if (current < min && current > 0) {
+						min = current;
+						x = j;
+						System.out.println(x);
+					}
+				}
 				for (int i = 0; i < m; i++) {
 					if (M[i][x]==1) {
 						List<Integer> S = new LinkedList<Integer>();
