@@ -77,19 +77,55 @@ public class ExactCover {
 		return l;
 	}
     
-    static public List<List<Integer>> generate(int a, int b, int k) {
+    static public List<List<Integer>> generateSubsets(int a, int b, int k) {
     	List<List<Integer>> l = new LinkedList<List<Integer>>();
     	if (b-a + 1 < k || a > b) {return l;}
     	if (k==0) {
         	l.add(new LinkedList<Integer>());
     		return l;
     	} 
-    	List<List<Integer>> l1 = generate(a+1,b,k);
-    	for (List<Integer> s : generate(a+1,b,k-1)) {
+    	List<List<Integer>> l1 = generateSubsets(a+1,b,k);
+    	for (List<Integer> s : generateSubsets(a+1,b,k-1)) {
     		s.add(a);
     		l.add(s);
     	}
     	l.addAll(l1);
     	return(l);
+    }
+    
+    static public List<List<Integer>> generateAllSubsets(int n) {
+    	List<List<Integer>> l = new LinkedList<List<Integer>>();
+    	for (int k = 1; k <= n; k++) {
+    		l.addAll(generateSubsets(1,n+1,k));
+    	}
+    	return l;
+    }
+    
+    static public int[][] generateMatrix(List<List<Integer>> l) {
+    	int max = 0;
+    	for (List<Integer> S : l) {
+    		for (Integer a : S) {
+    			if (a > max) {max = a;}
+    		}
+    	}
+    	int[][] M = new int[l.size()][max]; 
+    	int i = 0;
+    	for (List<Integer> S : l) {
+    		for (Integer a : S) {
+    			M[i][a-1] = 1;
+    		}
+    		i++;
+    	}
+    	return M;
+    }
+   
+    
+    static public void printMatrix(int[][] M) {
+    	for (int[] row : M) {
+    		for (int j : row) {
+    			System.out.print(j + " ");
+    		}
+			System.out.println();
+    	}
     }
 }
