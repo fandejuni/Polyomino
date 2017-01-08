@@ -9,6 +9,14 @@ import java.nio.file.Paths;
 
 public class Manipulate {
 
+    public static List<Polyomino> allFreeRedeimer(int P) {
+        Set<Polyomino> l = new HashSet<Polyomino>();
+        l.addAll(HI(P));
+        l.addAll(VI(P));
+        l.addAll(HX_VX(P));
+        return new LinkedList<Polyomino>(l);
+    }
+
     public static List<Polyomino> HI(int P) {
         Set<Square> vus = new HashSet<Square>();
         LinkedList<Square> untried = new LinkedList<Square>();
@@ -240,15 +248,15 @@ public class Manipulate {
 
     // Draw Polyominoes
     public static void draw(List<Polyomino> l) {
-//    	Collections.sort(l, new Comparator<Polyomino>(){
-//
-//    		  public int compare(Polyomino p1, Polyomino p2){
-//
-//    		    return p1.getDimensions().y-p2.getDimensions().y;
-//
-//    		  }
-//
-//    		});
+    	Collections.sort(l, new Comparator<Polyomino>(){
+
+    		  public int compare(Polyomino p1, Polyomino p2){
+
+    		    return p1.getDimensions().y-p2.getDimensions().y;
+
+    		  }
+
+    		});
         Set<Square> the_squares = new HashSet<Square>();
         int offsetH = 0;
         int offsetV = 0;
