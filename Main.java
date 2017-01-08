@@ -15,7 +15,7 @@ class Main {
 
         //tout.add(Manipulate.generateAllFreePolyominoes(4,3));
         //tout.add(Manipulate.allFixedRedeimer(9));
-        tout.add(Manipulate.HX_VX(6));
+        //tout.add(Manipulate.HX_VX(6));
         //tout.add(Manipulate.HI(7));
         //tout.add(Manipulate.VI(7));
         for (List<Polyomino> all : tout) {
@@ -27,20 +27,19 @@ class Main {
             Manipulate.draw(all);
         }
 
-        Set<Integer> X = new HashSet<Integer>();
-        List<List<Integer>> C = new LinkedList<List<Integer>>();
-        for (int i = 1; i < 7; i++) {
-            X.add(new Integer(i));
-        }
-        
-        //System.out.println(ExactCover.generate(1,5,2));
+		int[][] conf = new int[][]{
+			{ 0, 0, 1, 0, 1, 1, 0},
+			{ 1, 0, 0, 1, 0, 0, 1},
+			{ 0, 1, 1, 0, 0, 1, 0},
+			{ 1, 0, 0, 1, 0, 0, 0},
+			{ 0, 1, 0, 0, 0, 0, 1},
+			{ 0, 0, 0, 1, 1, 0, 1},
+		};
 
-        C.add(new LinkedList<Integer>(Arrays.asList(3, 5, 6)));
-        C.add(new LinkedList<Integer>(Arrays.asList(1, 4, 7)));
-        C.add(new LinkedList<Integer>(Arrays.asList(2, 3, 6)));
-        C.add(new LinkedList<Integer>(Arrays.asList(1, 4)));
-        C.add(new LinkedList<Integer>(Arrays.asList(2, 7)));
-        C.add(new LinkedList<Integer>(Arrays.asList(4, 5, 7)));
+        System.out.println(ExactCover.resolve(conf));
+		
+
+
 
     }
 }
