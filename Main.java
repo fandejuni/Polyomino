@@ -16,7 +16,7 @@ class Main {
         tout.add(Manipulate.generic(13, "R"));
         tout.add(Manipulate.generic(25, "R2"));*/
 
-<<<<<<< HEAD
+
         for (List<Polyomino> all : tout) {
             for (Polyomino p: all) {
                 p.canonicalForm();
@@ -54,16 +54,16 @@ class Main {
 		
 		ColumnObject H = DancingLinks.toDancingLinks(conf);
 		System.out.println(DancingLinks.exactCover(H));
-=======
-        Test.testBasePolyomino();
-        Test.testGenerator(tout);
-        Test.exactCover1();
-        Test.exactCover2();
-        Test.exactCover3();
-        Test.tiling1();
-        Test.tiling2();
+
+        //Test.testBasePolyomino();
+        //Test.testGenerator(tout);
+        //Test.exactCover1();
+        //Test.exactCover2();
+        //Test.exactCover3();
+        //Test.tiling1();
+        //Test.tiling2();
         Test.tiling3();
 
->>>>>>> bae44b5e6d2070584a9522355253fd2ab4044fe5
+
     }
 }

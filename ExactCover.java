@@ -40,7 +40,7 @@ public class ExactCover {
 					for (int i = 0; i < m; i++) {
 						current += M[i][j];
 					}
-					if (current <= min && current > 0) {
+					if (current < min && current > 0) {
 						min = current;
 						x = j;
 					}
