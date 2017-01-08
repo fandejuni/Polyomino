@@ -3,7 +3,7 @@ import java.util.*;
 public class Polyomino {
 	
     public Set<Square> squares;
-    static public int width = 25;
+    static public int width = 9;
 
     @Override
     public boolean equals(Object o) {
@@ -166,6 +166,27 @@ public class Polyomino {
             s.anti_rotation();
         }
         putOrigin(old_center);
+    }
+
+    public void double_vertical() {
+        putOrigin(new Square(0, 0));
+        Set<Square> new_squares = new HashSet<Square>(); 
+        for (Square s : squares) {
+            Square x = s.clone();
+            x.reflection_vertical();
+            new_squares.add(x);
+        }
+        squares.addAll(new_squares);
+    }
+    public void double_horizontal() {
+        putOrigin(new Square(0, 0));
+        Set<Square> new_squares = new HashSet<Square>(); 
+        for (Square s : squares) {
+            Square x = s.clone();
+            x.reflection_horizontal();
+            new_squares.add(x);
+        }
+        squares.addAll(new_squares);
     }
 
     public boolean isConnected() {

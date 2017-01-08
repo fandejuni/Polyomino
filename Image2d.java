@@ -3,6 +3,12 @@ import java.util.Collections;
 import java.util.LinkedList;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
+import java.awt.Graphics;
+
 
 // Manipulation for images
 public class Image2d {

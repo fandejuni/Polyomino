@@ -12,8 +12,8 @@ class Main {
         }
 //        Polyomino.draw(l);
         List<List<Polyomino>> tout = new LinkedList<List<Polyomino>>();
-        tout.add(Manipulate.allFixedRedeimer(6));
-        tout.add(Manipulate.generateAllFreePolyominoes(4,3));
+        //tout.add(Manipulate.allFixedRedeimer(6));
+        tout.add(Manipulate.generateAllFreePolyominoes(4,4));
         for (List<Polyomino> all : tout) {
             for (Polyomino p: all) {
                 p.canonicalForm();

@@ -8,23 +8,63 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class Manipulate {
+	
+    private static List<Square> getNeighbours(Square origin) {
+        List<Square> directions = new LinkedList<Square>();
+        directions.add(new Square(1, 0));
+        directions.add(new Square(-1, 0));
+        directions.add(new Square(0, 1));
+        directions.add(new Square(0, -1));
+        for (Square x : directions)
+            x.add(origin);
+        return directions;
+    }
 
     private static void log(String s) {
         System.out.println("Manipulate: " + s);
     }
 
+    public static List<Polyomino> N(int p) {
+        List<Polyomino> l = new LinkedList<Polyomino>();
+        // TODO
+        return l;
+    }
+
+    public static List<Polyomino> HI(int p) {
+        return new LinkedList<Polyomino>();
+    }
+
+    public static List<Polyomino> HX_VX(int p) {
+        List<Polyomino> l = new LinkedList<Polyomino>();
+        if (p % 2 == 1) {
+            return l;
+        }
+        else {
+            List<Polyomino> N = N(p/2);
+            for (Polyomino n : N) {
+                Polyomino x = n.clone();
+                Polyomino y = n.clone();
+                x.double_vertical();
+                y.double_horizontal();
+                l.add(x);
+                l.add(y);
+            }
+            return l;
+        }
+    }
+    
     // Generates all fixed polyominoes following Redeimer's method
     public static List<Polyomino> allFixedRedeimer(int P) {
         Set<Square> vus = new HashSet<Square>();
         LinkedList<Square> untried = new LinkedList<Square>();
-        
         Square origin = new Square(0, 0);
         untried.add(origin);
         vus.add(origin);
         List<Polyomino> l = new LinkedList<Polyomino>();
         return auxFixedRedeimer(P, new Polyomino(), untried, vus, l);
     }
-    
+
+   
     private static List<Polyomino> auxFixedRedeimer(int P, Polyomino parent, LinkedList<Square> untried, Set<Square> vus, List<Polyomino> l) {
 
         while (!untried.isEmpty()) {
@@ -35,7 +75,7 @@ public class Manipulate {
             l.add(parent.clone());
 
             if (parent.squares.size() < P) {
-               List<Square> voisins = Utilities.getNeighbours(point, new HashSet<Square>(), vus);
+               List<Square> voisins = getNeighbours(point);
                for (Square v : voisins) {
                    untried.add(v);
                    vus.add(v);
@@ -44,7 +84,8 @@ public class Manipulate {
                LinkedList<Square> copy_untried = (LinkedList<Square>) untried.clone();
                auxFixedRedeimer(P, parent, copy_untried, copy_vus, l);
                for (Square v : voisins) {
-                   untried.remove(v);
+                   if (!vus.contains(v) && v.x >= 0 && (v.y >= 0 || v.x > 0))
+                       untried.remove(v);
                }
             }
 
@@ -133,7 +174,9 @@ public class Manipulate {
 
     		  public int compare(Polyomino p1, Polyomino p2){
 
-    		    return p1.getDimensions().y-p2.getDimensions().y;
+                Random generator = new Random();
+    		    //return p1.getDimensions().y-p2.getDimensions().y;
+                return generator.nextInt();
 
     		  }
 
@@ -143,7 +186,7 @@ public class Manipulate {
         int offsetV = 0;
         int max = 0;
         int current;
-        int xmax = 75;
+        int xmax = 238;
         for (Polyomino p : l) {
         	current = p.getDimensions().y;
         	if (current > max) {max = current;}
