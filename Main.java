@@ -52,17 +52,15 @@ class Main {
 		ExactCover.printMatrix(M);
         System.out.println(ExactCover.resolve(M));*/
 		
-		ColumnObject H = DancingLinks.toDancingLinks(conf);
-		System.out.println(DancingLinks.exactCover(H));
 
         //Test.testBasePolyomino();
         //Test.testGenerator(tout);
-        Test.exactCover1();
+        //Test.exactCover1();
         //Test.exactCover2();
         //Test.exactCover3();
         //Test.tiling1();
         //Test.tiling2();
-        //Test.tiling3();
+        Test.tiling3();
 
 
     }

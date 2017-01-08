@@ -97,5 +97,18 @@ public class Test {
         Transformation v = new Transformation(p, l, false, "exactlyOnce");
         v.solve();
     }
+    
+    static public void dancingLinks1() {
+        int[][] conf = new int[][]{
+			{ 0, 0, 1, 0, 1, 1, 0},
+			{ 1, 0, 0, 1, 0, 0, 1},
+			{ 0, 1, 1, 0, 0, 1, 0},
+			{ 1, 0, 0, 1, 0, 0, 0},
+			{ 0, 1, 0, 0, 0, 0, 1},
+			{ 0, 0, 0, 1, 1, 0, 1},
+		};
+		ColumnObject H = DancingLinks.toDancingLinks(conf);
+		System.out.println(DancingLinks.exactCover(H));
+    }
 
 }
