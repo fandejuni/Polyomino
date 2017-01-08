@@ -23,7 +23,6 @@ public class DancingLinks {
 		
 		
 		for(int j = 0; j < n; j++){
-			
 			ColumnObject next_column = new ColumnObject(null, null, current_column, null, null, 0, String.valueOf(j + 1));
 			next_column.U = next_column; 
 			next_column.D = next_column; 
@@ -48,14 +47,14 @@ public class DancingLinks {
 					}
 					
 					else{
-					current_data.L = element[i];
-					element[i].R = current_data;
+						current_data.L = element[i];
+						element[i].R = current_data;
 					}
 					element[i] = current_data;
 				}
 			}
 			
-			for(int i = 0; i < n; i++){
+			for(int i = 0; i < m; i++){
 				if (leftmost[i] != null && leftmost[i] != element[i]){
 					leftmost[i].L = element[i];
 					element[i].R = leftmost[i];
@@ -114,7 +113,16 @@ public class DancingLinks {
 		List<List<Integer>> l = new LinkedList<List<Integer>>();
 		if (H.R == H) {l.add(new LinkedList<Integer>());}
 		else {
-			ColumnObject x = new ColumnObject(null, null, null, null, null, 0, "");
+			ColumnObject var = (ColumnObject) H.R;
+			int min = var.S;
+			ColumnObject x = var;
+			while (var != H) {
+				var = (ColumnObject) var.R;
+				if (var.S < min && var.S > 0) {
+					min = var.S;
+					x = var;
+				}
+			}
 			coverColumn(x);
 			DataObject t = x.U;
 			while (t != x) {
