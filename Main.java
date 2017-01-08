@@ -46,7 +46,7 @@ class Main {
 			{ 0, 0, 0, 1, 1, 0, 1},
 		};
 
-        //System.out.println(ExactCover.resolve(conf));
+        System.out.println(ExactCover.resolve(conf));
 		int[][] conf2 = new int[][]{
 			{ 0, 0, 1, 0, 1, 1, 0},
 			{ 1, 0, 0, 1, 0, 0, 0},
@@ -56,16 +56,46 @@ class Main {
 			{ 0, 0, 0, 1, 1, 0, 1},
 		};
 
-        //System.out.println(ExactCover.resolve(conf2));
+        System.out.println(ExactCover.resolve(conf2));
 		
-        /*System.out.println(ExactCover.generateSubsets(1,7,2));
+        //System.out.println(ExactCover.generateSubsets(1,7,2));
         int [][] M = ExactCover.generateMatrix(ExactCover.generateSubsets(1,7,2));
-        ExactCover.printMatrix(M);
-        System.out.println(ExactCover.resolve(M));*/
-        
-		System.out.println(ExactCover.generateAllSubsets(6));
-		int [][] M = ExactCover.generateMatrix(ExactCover.generateAllSubsets(6));
-		ExactCover.printMatrix(M);
+        //ExactCover.printMatrix(M);
         System.out.println(ExactCover.resolve(M));
+        
+		//System.out.println(ExactCover.generateAllSubsets(6));
+		int [][] M2 = ExactCover.generateMatrix(ExactCover.generateAllSubsets(6));
+		//ExactCover.printMatrix(M);
+        System.out.println(ExactCover.resolve(M2));
+
+
+
+
+
+
+
+        Polyomino p = new Polyomino("[(0, 0), (1, 0), (2,0),(0,1),(1,1),(2,1)]");
+        List<Polyomino> collection = new LinkedList<Polyomino>();
+        collection.add(new Polyomino("[(0,0),(1,0),(0,1)]"));
+        collection.add(new Polyomino("[(0,0)]"));
+        collection.add(new Polyomino("[(0,0),(1,0)]"));
+        int[][] m = Transformation.polyominoTiling(p, collection, false, true);
+        ExactCover.printMatrix(m);
+        System.out.println(ExactCover.resolve(m));
+
+        p = new Polyomino("[(0, 0), (1, 0), (2,0),(3,0),(0,1),(1,1),(2,1),(3,1)]");
+        collection = new LinkedList<Polyomino>();
+        collection.add(new Polyomino("[(0,0),(1,0),(0,1)]"));
+        collection.add(new Polyomino("[(0,0),(1,0)]"));
+        m = Transformation.polyominoTiling(p, collection, true, true);
+        ExactCover.printMatrix(m);
+        System.out.println(ExactCover.resolve(m));
+
+
+
+
+
+
+
     }
 }
