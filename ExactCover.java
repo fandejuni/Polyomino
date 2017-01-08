@@ -40,31 +40,32 @@ public class ExactCover {
 					for (int i = 0; i < m; i++) {
 						current += M[i][j];
 					}
-					if (current < min && current > 0) {
+					if (current <= min && current > 0) {
 						min = current;
 						x = j;
-						System.out.println(x);
 					}
 				}
 				for (int i = 0; i < m; i++) {
 					if (M[i][x]==1) {
+						int[][] M_star = new int[m][n];
+						M_star = M;
 						List<Integer> S = new LinkedList<Integer>();
 						for (int j = 0; j < n; j++) {
-							if (M[i][j]==1) {
+							if (M_star[i][j]==1) {
 								S.add(j+1);
 								for (int k = 0; k < m; k++) {
 									if (k!=i) {
-										if (M[k][j]==1) {
+										if (M_star[k][j]==1) {
 											for (int p = 0; p < n; p++) {
-												M[k][p]=0;
+												M_star[k][p]=0;
 											}
 										}
 									}
 								}
-								M[i][j]=0;
+								M_star[i][j]=0;
 							}
 						}
-						for (List<Integer> P : resolve(M)) {
+						for (List<Integer> P : resolve(M_star)) {
 							l.add(P);
 						}
 						l.add(S);
