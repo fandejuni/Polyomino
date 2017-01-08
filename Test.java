@@ -95,6 +95,19 @@ public class Test {
         Transformation v = new Transformation(p, l, false, "atMostOnce");
         v.solve();
     }
+    
+    static public void dancingLinks1() {
+        int[][] conf = new int[][]{
+			{ 0, 0, 1, 0, 1, 1, 0},
+			{ 1, 0, 0, 1, 0, 0, 1},
+			{ 0, 1, 1, 0, 0, 1, 0},
+			{ 1, 0, 0, 1, 0, 0, 0},
+			{ 0, 1, 0, 0, 0, 0, 1},
+			{ 0, 0, 0, 1, 1, 0, 1},
+		};
+		ColumnObject H = DancingLinks.toDancingLinks(conf);
+		System.out.println(DancingLinks.exactCover(H));
+    }
 
     static public void tilingRectangle(int n, int k) {
         Polyomino p = Polyomino.rectangle(n, n);
