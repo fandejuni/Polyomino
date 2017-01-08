@@ -16,14 +16,15 @@ class Main {
         tout.add(Manipulate.generic(13, "R"));
         tout.add(Manipulate.generic(25, "R2"));
 
-        Test.testBasePolyomino();
+        //Test.testBasePolyomino();
         Test.testGenerator(tout);
         Test.exactCover1();
         Test.exactCover2();
         Test.exactCover3();
         Test.tiling1();
         Test.tiling2();
-        Test.tiling3();
+        Test.tiling3(5,5);
+        Test.tilingRectangle(8, 5);
 
     }
 }

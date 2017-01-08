@@ -5,6 +5,16 @@ public class Polyomino {
     public Set<Square> squares;
     static public int width = 10;
 
+    static public Polyomino rectangle(int width, int height) {
+        Polyomino p = new Polyomino();
+        for (int x = 0; x < width; x++) {
+            for (int y = 0; y < height; y++) {
+                p.squares.add(new Square(x, y));
+            }
+        }
+        return p;
+    }
+
     public List<Polyomino> turnAround() {
 
         Set<Polyomino> l = new HashSet<Polyomino>();
