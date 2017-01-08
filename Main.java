@@ -18,28 +18,13 @@ class Main {
         //tout.add(Manipulate.HX_VX(6));
         //tout.add(Manipulate.HI(7));
         //tout.add(Manipulate.VI(7));
-        tout.add(Manipulate.allFreeRedeimer(6));
-
-        List<Polyomino> l2 = new LinkedList<Polyomino>();
-
         for (List<Polyomino> all : tout) {
             for (Polyomino p: all) {
                 p.canonicalForm();
-                if (p.squares.size() == 2) {
-                    //System.out.println(p);
-                    l2.add(p);
-                }
             }
+            System.out.println(all);
             System.out.println(all.size());
             Manipulate.draw(all);
-        }
-        for (Polyomino p1 : l2) {
-            for (Polyomino p2 : l2) {
-                System.out.println("");
-                System.out.println(p1);
-                System.out.println(p2);
-                System.out.println(p1.equals(p2));
-            }
         }
 
 		int[][] conf = new int[][]{
@@ -52,6 +37,16 @@ class Main {
 		};
 
         System.out.println(ExactCover.resolve(conf));
+		int[][] conf2 = new int[][]{
+			{ 0, 0, 1, 0, 1, 1, 0},
+			{ 1, 0, 0, 1, 0, 0, 0},
+			{ 0, 1, 1, 0, 0, 1, 0},
+			{ 1, 0, 0, 1, 0, 0, 1},
+			{ 0, 1, 0, 0, 0, 0, 1},
+			{ 0, 0, 0, 1, 1, 0, 1},
+		};
+
+        System.out.println(ExactCover.resolve(conf2));
 		
 
 

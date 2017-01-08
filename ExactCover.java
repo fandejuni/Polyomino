@@ -17,7 +17,9 @@ public class ExactCover {
 					}
 				}
 			}
-			if (n==0 || isNull) {l.add(new LinkedList<Integer>());}
+			if (n==0 || isNull) {
+				if (n==0) {l.add(new LinkedList<Integer>());}
+			}
 			else {
 				int a = 0;
 				int b = 0;
@@ -34,10 +36,9 @@ public class ExactCover {
 				for (int i = 0; i < m; i++) {
 					if (M[i][x]==1) {
 						List<Integer> S = new LinkedList<Integer>();
-						S.add(x);
 						for (int j = 0; j < n; j++) {
 							if (M[i][j]==1) {
-								S.add(j);
+								S.add(j+1);
 								for (int k = 0; k < m; k++) {
 									if (k!=i) {
 										if (M[k][j]==1) {
@@ -51,10 +52,9 @@ public class ExactCover {
 							}
 						}
 						for (List<Integer> P : resolve(M)) {
-							P.addAll(S);
 							l.add(P);
 						}
-						
+						l.add(S);
 					}
 				}
 			}
