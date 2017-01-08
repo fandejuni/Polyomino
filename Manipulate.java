@@ -11,100 +11,60 @@ public class Manipulate {
 
     public static List<Polyomino> allFreeRedeimer(int P) {
         Set<Polyomino> l = new HashSet<Polyomino>();
-        l.addAll(HI(P));
-        l.addAll(VI(P));
         l.addAll(HX_VX(P));
+        l.addAll(generic(P, "HI"));
+        l.addAll(generic(P, "VI"));
+        l.addAll(generic(P, "A"));
+        l.addAll(generic(P, "D"));
         return new LinkedList<Polyomino>(l);
     }
-
-    public static List<Polyomino> HI(int P) {
+   
+    // s can be "HI", "VI", "Fixed", "A", "D"
+    public static List<Polyomino> generic(int P, String s) {
         Set<Square> vus = new HashSet<Square>();
         LinkedList<Square> untried = new LinkedList<Square>();
         Square origin = new Square(0, 0);
         untried.add(origin);
         vus.add(origin);
         List<Polyomino> l = new LinkedList<Polyomino>();
-        return HI_aux(P, new Polyomino(), untried, vus, l);
+        return generic_aux(P, new Polyomino(), untried, vus, l, s);
     }
    
-    private static List<Polyomino> HI_aux(int P, Polyomino parent, LinkedList<Square> untried, Set<Square> vus, List<Polyomino> l) {
+    // Personnalized functions :
+    // .image(s), .hasImage(s), .isAllowed(s)
+    private static List<Polyomino> generic_aux(int P, Polyomino parent, LinkedList<Square> untried, Set<Square> vus, List<Polyomino> l, String s) {
         while (!untried.isEmpty()) {
             Square point = untried.pop();
-            Square anti_point = point.clone();
-            anti_point.reflection_horizontal();
             parent.squares.add(point);
-            if (point.y > 0) {
+            List<Square> anti_points = point.images(s);
+            for (Square anti_point : anti_points) {
                 parent.squares.add(anti_point);
             }
 
             if (parent.squares.size() <= P)
                 l.add(parent.clone());
             if (parent.squares.size() < P) {
-               List<Square> voisins = getNeighbours(point);
+               List<Square> voisins = getNeighbours(point, s);
                LinkedList<Square> copy_untried = (LinkedList<Square>) untried.clone();
                Set<Square> copy_vus = new HashSet<Square>(vus);
                for (Square v : voisins) {
-                   if (!vus.contains(v) && v.y >= 0 && (v.x >= 0 || v.y > 0)) {
+                   if (!copy_vus.contains(v.canonicalForm(s)) && v.isAllowed(s)) {
                        copy_untried.add(v);
-                       copy_vus.add(v);
+                       copy_vus.add(v.canonicalForm(s));
                    }
                }
-               HI_aux(P, parent, copy_untried, copy_vus, l);
+
+               generic_aux(P, parent, copy_untried, copy_vus, l, s);
             }
             parent.squares.remove(point);
-            if (point.y > 0) {
+            for (Square anti_point : anti_points) {
                 parent.squares.remove(anti_point);
             }
         }
         return l;
     }
 
-    // VI counter
-    public static List<Polyomino> VI(int P) {
-        Set<Square> vus = new HashSet<Square>();
-        LinkedList<Square> untried = new LinkedList<Square>();
-        Square origin = new Square(0, 0);
-        untried.add(origin);
-        vus.add(origin);
-        List<Polyomino> l = new LinkedList<Polyomino>();
-        return VI_aux(P, new Polyomino(), untried, vus, l);
-    }
-   
-    private static List<Polyomino> VI_aux(int P, Polyomino parent, LinkedList<Square> untried, Set<Square> vus, List<Polyomino> l) {
-        while (!untried.isEmpty()) {
-            Square point = untried.pop();
-            Square anti_point = point.clone();
-            anti_point.reflection_vertical();
-            parent.squares.add(point);
-            if (point.x > 0) {
-                parent.squares.add(anti_point);
-            }
-            if (parent.squares.size() <= P)
-                l.add(parent.clone());
-            if (parent.squares.size() < P) {
-               List<Square> voisins = getNeighbours(point);
-               LinkedList<Square> copy_untried = (LinkedList<Square>) untried.clone();
-               Set<Square> copy_vus = new HashSet<Square>(vus);
-               for (Square v : voisins) {
-                   if (!vus.contains(v) && v.x >= 0 && (v.y >= 0 || v.x > 0)) {
-                       copy_untried.add(v);
-                       copy_vus.add(v);
-                   }
-               }
-               VI_aux(P, parent, copy_untried, copy_vus, l);
-            }
-            parent.squares.remove(point);
-            if (point.x > 0) {
-                parent.squares.remove(anti_point);
-            }
-        }
-        return l;
-    }
-
-
-
-
-    private static List<Square> getNeighbours(Square origin) {
+    private static List<Square> getNeighbours(Square origin, String s) {
         List<Square> directions = new LinkedList<Square>();
         directions.add(new Square(0, 1));
         directions.add(new Square(1, 0));
@@ -112,6 +72,12 @@ public class Manipulate {
         directions.add(new Square(0, -1));
         for (Square x : directions)
             x.add(origin);
+        if (s == "R2") {
+            List<Square> images = new LinkedList<Square>();
+            for (Square x : directions)
+                images.addAll(x.images(s));
+            directions.addAll(images);
+        }
         return directions;
     }
 
@@ -125,8 +91,7 @@ public class Manipulate {
             return l;
         }
         else {
-            List<Polyomino> N = allFixedRedeimer(p/2);
-            System.out.println(N.size());
+            List<Polyomino> N = generic(p/2, "Fixed");
             for (Polyomino n : N) {
                 Polyomino x = n.clone();
                 Polyomino y = n.clone();
@@ -139,39 +104,6 @@ public class Manipulate {
         }
     }
     
-    // Generates all fixed polyominoes following Redeimer's method
-    public static List<Polyomino> allFixedRedeimer(int P) {
-        Set<Square> vus = new HashSet<Square>();
-        LinkedList<Square> untried = new LinkedList<Square>();
-        Square origin = new Square(0, 0);
-        untried.add(origin);
-        vus.add(origin);
-        List<Polyomino> l = new LinkedList<Polyomino>();
-        return auxFixedRedeimer(P, new Polyomino(), untried, vus, l);
-    }
-
-    private static List<Polyomino> auxFixedRedeimer(int P, Polyomino parent, LinkedList<Square> untried, Set<Square> vus, List<Polyomino> l) {
-        while (!untried.isEmpty()) {
-            Square point = untried.pop();
-            parent.squares.add(point);
-            l.add(parent.clone());
-            if (parent.squares.size() < P) {
-               List<Square> voisins = getNeighbours(point);
-               LinkedList<Square> copy_untried = (LinkedList<Square>) untried.clone();
-               Set<Square> copy_vus = new HashSet<Square>(vus);
-               for (Square v : voisins) {
-                   if (!vus.contains(v) && v.x >= 0 && (v.y >= 0 || v.x > 0)) {
-                       copy_untried.add(v);
-                       copy_vus.add(v);
-                   }
-               }
-               auxFixedRedeimer(P, parent, copy_untried, copy_vus, l);
-            }
-            parent.squares.remove(point);
-        }
-        return l;
-    }
-
     // Generates all free polyominoes in a given area
     public static List<Polyomino> generateAllFreePolyominoes(int width, int height) {
         List<Polyomino> fixed = generateAllFixedPolyominoes(width, height);
@@ -262,7 +194,7 @@ public class Manipulate {
         int offsetV = 0;
         int max = 0;
         int current;
-        int xmax = 75;
+        int xmax = 1920 / Polyomino.width;
         for (Polyomino p : l) {
         	current = p.getDimensions().y;
         	if (current > max) {max = current;}

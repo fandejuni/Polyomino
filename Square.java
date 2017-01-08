@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.util.*;
 
 public class Square {
     public int x;
@@ -28,6 +29,99 @@ public class Square {
     // Creates a copy of a Square
     public Square clone() {
         return new Square(x, y);
+    }
+
+    public boolean hasImage(String s) {
+        switch (s) {
+            case "HI": return y > 0;
+            case "VI": return x > 0;
+            case "A": return y - x > 0;
+            case "D": return y + x > 0;
+            case "R": return true;
+            case "Fixed": return false;
+        }
+        return false;
+    }
+
+    public Square canonicalForm(String s) {
+        Square point = clone();
+        if (s == "R2" && !(x == 0 && y == 0)) {
+            while (!(point.x > 0 && point.y >= 0)) {
+                point.rotation();
+            }
+        }
+        return point;
+    }
+
+    public boolean isAllowed(String s) {
+        switch (s) {
+            case "HI": return y >= 0 && (x >= 0 || y > 0);
+            case "VI": return x >= 0 && (y >= 0 || x > 0);
+            case "A": return y - x >= 0 && (y - x > 0 || x >= 0);
+            case "D": return y + x >= 0 && (y + x > 0 || x >= 0);
+            case "R": return y > 0 || (y == 0 && x > 0);
+            case "R2": return true;
+            case "Fixed": return x >= 0 && (y >= 0 || x > 0);
+        }
+        return true;
+    }
+
+    public List<Square> images(String s) {
+        List<Square> l = new LinkedList<Square>();
+        if (s == "R2") {
+            image(s);
+            l.add(clone());
+            image(s);
+            l.add(clone());
+            image(s);
+            l.add(clone());
+            image(s);
+        }
+        else {
+            if (hasImage(s)) {
+                image(s);
+                l.add(clone());
+                image(s);
+            }
+        }
+        return l;
+    }
+ 
+    public void image(String s) {
+        switch (s) {
+            case "HI": reflection_horizontal();
+                break;
+            case "VI": reflection_vertical();
+                break;
+            case "R": rotation_pi();
+                break;
+            case "A": reflection_diagonal();
+                break;
+            case "D": reflection_anti_diagonal();
+                break;
+            case "R2": rotation();
+                break;
+        }
+    }
+    
+    public void rotation_pi() {
+        x = -x;
+        y = -y;
+    }
+
+    // Reflection wrt the positive diagonal
+    public void reflection_anti_diagonal() {
+        int temp = x;
+        x = -y;
+        y = -temp;
+    }
+
+
+    // Reflection wrt the positive diagonal
+    public void reflection_diagonal() {
+        int temp = x;
+        x = y;
+        y = temp;
     }
 
     // Horizontal mirror
