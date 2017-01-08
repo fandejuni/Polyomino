@@ -9,21 +9,19 @@ public class ExactCover {
 		if (m==0) {l.add(new LinkedList<Integer>());}
 		else {
 			int n = M[0].length;
-			System.out.println(m + " " +n);
-			int[][] A = new int[m][n];
+			boolean isNull = true; 
 			for (int i = 0; i < m; i++) {
 				for (int j = 0; j < n; j++) {
-					A[i][j] = 0;
-					System.out.println(M[i][j]);
+					if (M[i][j] == 1) {
+						isNull = false;
+					}
 				}
 			}
-			System.out.println(M.equals(A));
-			if (n==0 || M.equals(A)) {l.add(new LinkedList<Integer>());System.out.println("ok");}
+			if (n==0 || isNull) {l.add(new LinkedList<Integer>());}
 			else {
 				int a = 0;
 				int b = 0;
 				while (M[a][b]!=1) {
-					System.out.println(a +  " "+ b + " " + M[a][b]);
 					if (b==n-1) {
 						a++;
 						b=0;
@@ -42,7 +40,6 @@ public class ExactCover {
 								S.add(j);
 								for (int k = 0; k < m; k++) {
 									if (k!=i) {
-										System.out.println(k);
 										if (M[k][j]==1) {
 											for (int p = 0; p < n; p++) {
 												M[k][p]=0;
