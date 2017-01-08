@@ -19,7 +19,6 @@ class Main {
         tout.add(Manipulate.HX_VX(12));
         tout.add(Manipulate.generic(12, "HI"));
         tout.add(Manipulate.generic(12, "VI"));
-        //tout.add(Manipulate.allFreeRedeimer(7));
         tout.add(Manipulate.generic(12, "A"));
         tout.add(Manipulate.generic(12, "D"));
         tout.add(Manipulate.generic(13, "R"));
@@ -29,9 +28,15 @@ class Main {
             for (Polyomino p: all) {
                 p.canonicalForm();
             }
+            //System.out.println(all);
             System.out.println(all.size());
-            Manipulate.draw(all);
+            //Manipulate.draw(all);
         }
+
+
+
+
+
 		int[][] conf = new int[][]{
 			{ 0, 0, 1, 0, 1, 1, 0},
 			{ 1, 0, 0, 1, 0, 0, 1},
@@ -41,7 +46,17 @@ class Main {
 			{ 0, 0, 0, 1, 1, 0, 1},
 		};
 
-        //System.out.println(ExactCover.resolve(conf));
+        System.out.println(ExactCover.resolve(conf));
+		int[][] conf2 = new int[][]{
+			{ 0, 0, 1, 0, 1, 1, 0},
+			{ 1, 0, 0, 1, 0, 0, 0},
+			{ 0, 1, 1, 0, 0, 1, 0},
+			{ 1, 0, 0, 1, 0, 0, 1},
+			{ 0, 1, 0, 0, 0, 0, 1},
+			{ 0, 0, 0, 1, 1, 0, 1},
+		};
+
+        System.out.println(ExactCover.resolve(conf2));
 		
 
 
