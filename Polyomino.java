@@ -168,6 +168,27 @@ public class Polyomino {
         putOrigin(old_center);
     }
 
+    public void double_vertical() {
+        putOrigin(new Square(0, 0));
+        Set<Square> new_squares = new HashSet<Square>(); 
+        for (Square s : squares) {
+            Square x = s.clone();
+            x.double_vertical();
+            new_squares.add(x);
+        }
+        squares.addAll(new_squares);
+    }
+    public void double_horizontal() {
+        putOrigin(new Square(0, 0));
+        Set<Square> new_squares = new HashSet<Square>(); 
+        for (Square s : squares) {
+            Square x = s.clone();
+            x.double_horizontal();
+            new_squares.add(x);
+        }
+        squares.addAll(new_squares);
+    }
+
     public boolean isConnected() {
 
         if (squares.size() == 0) {

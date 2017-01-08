@@ -34,10 +34,18 @@ public class Square {
     public void reflection_horizontal() {
         y = -y;
     }
+
+    public void double_horizontal() {
+        y = -(y + 1);
+    }
     
     // Vertical mirror
     public void reflection_vertical() {
         x = - x;
+    }
+
+    public void double_vertical() {
+        x = -(x + 1);
     }
 
     // Rotation sens trigo

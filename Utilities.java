@@ -8,7 +8,7 @@ public class Utilities {
         float r = generator.nextFloat();
         float g = generator.nextFloat();
         float b = generator.nextFloat();
-        if (r + g + b > 2.5) {
+        if (r + g + b > 2) {
             r = r / 2;
             g = g / 2;
             b = b / 2;
