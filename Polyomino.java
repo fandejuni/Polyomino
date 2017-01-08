@@ -3,7 +3,7 @@ import java.util.*;
 public class Polyomino {
 	
     public Set<Square> squares;
-    static public int width = 25;
+    static public int width = 10;
 
     @Override
     public boolean equals(Object o) {
