@@ -2,77 +2,112 @@ import java.util.*;
 
 public class Transformation {
 
-    static public int[][] polyominoTiling(Polyomino ground, List<Polyomino> collection, boolean rotation_allowed, boolean reusable) {
+    Map<Square, Integer> which_id;
+    Map<Integer, Square> anti_which_id;
+    int[][] M;
+    int n;
+
+    public void solve() {
+        System.out.println(which_id);
+        System.out.println(anti_which_id);
+        List<List<Integer>> r = ExactCover.resolve(M);
+        List<Polyomino> l = new LinkedList<Polyomino>();
+
+        for (List<Integer> u : r) {
+            Polyomino p = new Polyomino();
+            for (Integer x : u) {
+                if (x <= n)
+                    p.squares.add(anti_which_id.get(x - 1));
+
+            }
+            l.add(p);
+        }
+
+        System.out.println(r);
+        System.out.println(l);
+        Manipulate.draw_exactly(l, 100);
+
+    }
+
+    // Possible values for status
+    // 1: atMostOnce
+    // 2: exactlyOnce
+    // 3: reusable
+    public Transformation(Polyomino ground, List<Polyomino> collection, boolean rotation_allowed, String status) {
         Square origin = new Square(0, 0);
         ground.putOrigin(origin);
         Square dimensions = ground.getDimensions();
         int WIDTH = dimensions.x;
         int HEIGHT = dimensions.y;
+        int n_polyominos = collection.size();
+        if (status == "reusable")
+            n_polyominos = 0;
         
         // We give a number to each square of ground
-        Map<Square, Integer> which_id = new HashMap<Square, Integer>();
+        which_id = new HashMap<Square, Integer>();
+        anti_which_id = new HashMap<Integer, Square>();
         int i = 0;
         for (Square x : ground.squares) {
             which_id.put(x, i);
+            anti_which_id.put(i, x);
             i++;
         }
-        int n = i;
-
-        // Gives the ids of collections from ID
-        Map<Integer, List<Integer>> collections_with_id = new HashMap<Integer, List<Integer>>();
-        // Gives the ID of a collection id
-        Map<Integer, Integer> id_of_collection = new HashMap<Integer, Integer>();
+        n = i;
 
         List<int[]> almost_M = new LinkedList<int[]>();
 
         int ID = 0;
-        int id = 0;
         for (Polyomino P : collection) {
-            List<Integer> ids_lies_polyomino = new LinkedList<Integer>();
             List<Polyomino> rotations = new LinkedList<Polyomino>();
             if (rotation_allowed)
                 rotations = P.turnAround();
             else
                 rotations.add(P);
             for (Polyomino p : rotations) {
-                System.out.println("");
-                System.out.println("Nouveau !");
-                System.out.println(p);
                 Square dim = p.getDimensions();
                 int width = dim.x;
                 int height = dim.y;
+                if (status == "atMostOnce") {
+                    int[] line = new int[n + n_polyominos];
+                    line[n + ID] = 1;
+                    almost_M.add(line);
+                }
                 for (int x = 0; x < WIDTH - width + 1; x++) {
                     for (int y = 0; y < HEIGHT - height + 1; y++) {
-                        System.out.println(new Square(x, y));
                         p.putOrigin(new Square(x, y));
                         if (ground.includes(p)) {
-                            System.out.println("Yes");
-                            int[] line = new int[n];
+                            int[] line = new int[n + n_polyominos];
                             for (Square s : p.squares) {
                                 line[which_id.get(s)] = 1;
                             }
+                            if (status != "reusable")
+                                line[n + ID] = 1;
                             almost_M.add(line);
-                            id++;
-                            ids_lies_polyomino.add(id);
-                            id_of_collection.put(id, ID);
                         }
                     }
                 }
             }
-            collections_with_id.put(ID, ids_lies_polyomino);
             ID++;
         }
         
         // Eventually, we convert almost_M to a matrix
-        int[][] M = new int[almost_M.size()][n];
+        M = new int[almost_M.size()][n];
         i = 0;
         for (int[] line : almost_M) {
             M[i] = line;
             i++;
         }
-        System.out.println(which_id);
-        System.out.println(collections_with_id);
-        System.out.println(id_of_collection);
-        return M;
+        System.out.println("\nMatrice");
+        ExactCover.printMatrix(M);
     }
+    
+
+
+	public void test2(int n, int k){
+		//toPrint.draw(10,10);
+    }
+    
+
+
+
 }
