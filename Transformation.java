@@ -8,8 +8,6 @@ public class Transformation {
     int n;
 
     public void solve() {
-        System.out.println(which_id);
-        System.out.println(anti_which_id);
         List<List<List<Integer>>> all = ExactCover.resolve(M);
         System.out.println(all);
         List<List<Integer>> r = all.iterator().next();
@@ -26,8 +24,7 @@ public class Transformation {
         }
 
         System.out.println(r);
-        System.out.println(l);
-        Manipulate.draw_exactly(l, 100);
+        Manipulate.draw_exactly(l, 50);
 
     }
 
@@ -99,17 +96,6 @@ public class Transformation {
             M[i] = line;
             i++;
         }
-        System.out.println("\nMatrice");
-        ExactCover.printMatrix(M);
     }
-    
-
-
-	public void test2(int n, int k){
-		//toPrint.draw(10,10);
-    }
-    
-
-
 
 }

@@ -19,11 +19,11 @@ public class Manipulate {
         return new LinkedList<Polyomino>(l);
     }
    
-    public static List<Polyomino> fixed(int p) {
+    public static List<Polyomino> fixed(int a, int b) {
         List<Polyomino> l = new LinkedList<Polyomino>();
-        List<Polyomino> r = generic(p, "Fixed");
+        List<Polyomino> r = generic(b, "Fixed");
         for (Polyomino  x : r) {
-            if (x.squares.size() == p) {
+            if (x.squares.size() >= a) {
                 l.add(x);
             }
         }

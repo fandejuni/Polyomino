@@ -83,9 +83,7 @@ public class Test {
         u.solve();
     }
 
-    static public void tiling3() {
-        int n = 5;
-        int k = 5;
+    static public void tiling3(int n, int k) {
 		Polyomino p = new Polyomino();
     	for(int i = 0; i < n; i++){
     		for(int j = 0; j < n; j++){
@@ -93,8 +91,8 @@ public class Test {
     			p.squares.add(a);
     		}
     	}
-		List<Polyomino> l = Manipulate.fixed(k);
-        Transformation v = new Transformation(p, l, false, "exactlyOnce");
+		List<Polyomino> l = Manipulate.fixed(k - 1, k + 1);
+        Transformation v = new Transformation(p, l, false, "atMostOnce");
         v.solve();
     }
     
@@ -107,6 +105,26 @@ public class Test {
 			{ 0, 1, 0, 0, 0, 0, 1},
 			{ 0, 0, 0, 1, 1, 0, 1},
 		};
+		ColumnObject H = DancingLinks.toDancingLinks(conf);
+		System.out.println(DancingLinks.exactCover(H));
+    }
+
+    static public void tilingRectangle(int n, int k) {
+        Polyomino p = Polyomino.rectangle(n, n);
+        Transformation t = new Transformation(p, Manipulate.fixed(2, k), false, "atMostOnce");
+        t.solve();
+    }
+
+    static public void tiling4(){
+		int[][] conf = new int[][]{
+			{ 0, 0, 1, 0, 1, 1, 0},
+			{ 1, 0, 0, 1, 0, 0, 1},
+			{ 0, 1, 1, 0, 0, 1, 0},
+			{ 1, 0, 0, 1, 0, 0, 0},
+			{ 0, 1, 0, 0, 0, 0, 1},
+			{ 0, 0, 0, 1, 1, 0, 1},
+		};
+
 		ColumnObject H = DancingLinks.toDancingLinks(conf);
 		System.out.println(DancingLinks.exactCover(H));
     }
