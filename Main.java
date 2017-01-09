@@ -30,7 +30,7 @@ class Main {
         //Test.tiling3DL(4,6);
         //Test.tilingRectangle(4,3);
         //Test.tilingRectangleDL(7,3);
-        Test.ultimateTest(8, 4);
+        //Test.ultimateTest(8, 4);
 
 
     }

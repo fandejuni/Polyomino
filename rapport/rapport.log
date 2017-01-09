@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/Debian) (preloaded format=pdflatex 2016.12.11)  9 JAN 2017 23:40
+=======
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9) (preloaded format=pdflatex 2017.1.9)  9 JAN 2017 23:47
+>>>>>>> 234b41e826163456fba22b8504d34331454c9008
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -589,6 +593,7 @@ Package pdftex.def Info: images/dilatation.png used on input line 119.
  [4 <./images/diagonal.png>] [5 <./images/rotational_25.png> <./images/dilatati
 on.png>] (./rapport.aux) ) 
 Here is how much of TeX's memory you used:
+<<<<<<< HEAD
  2372 strings out of 493013
  32308 string characters out of 6135681
  103428 words of memory out of 5000000
@@ -607,6 +612,27 @@ texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-di
 st/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts
 /type1/public/amsfonts/cm/cmti12.pfb>
 Output written on rapport.pdf (5 pages, 297016 bytes).
+=======
+ 1942 strings out of 493634
+ 25656 string characters out of 3141312
+ 93543 words of memory out of 3000000
+ 5326 multiletter control sequences out of 15000+200000
+ 9155 words of font info for 32 fonts, out of 3000000 for 9000
+ 1025 hyphenation exceptions out of 8191
+ 27i,8n,28p,710b,259s stack positions out of 5000i,500n,10000p,200000b,50000s
+<C
+:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/
+Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Pr
+ogram Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Prog
+ram Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Program
+ Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Fi
+les (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Files
+ (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Program Files (x
+86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Program Files (x86)/
+MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Files (x86)/MiKT
+eX 2.9/fonts/type1/public/amsfonts/cm/cmti12.pfb>
+Output written on rapport.pdf (5 pages, 259066 bytes).
+>>>>>>> 234b41e826163456fba22b8504d34331454c9008
 PDF statistics:
  70 PDF objects out of 1000 (max. 8388607)
  43 compressed objects within 1 object stream
