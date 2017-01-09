@@ -96,11 +96,11 @@ If one of its form is in the set, we do not add it, otherwise we add it.
 
 \illustration{diagonal}{All free polyominoes stable by reflection in descending diagonal, sized under 12.}
 
-We do not compute all types of symmetrical polyminoes.
-We compute polyminoes symmetrical with regard to the horizontal axis, the vertical axis, the ascending and descending diagonal, and the ones symmetrical with regard to a point.
-Symmetrical polyominoes with regard to the vertical axis (and when the axis is between squares), and with regard to the horizontal axis (when the axis is between squares), that is to say HX and VX polyminoes, are computed using fixed polyminoes of half size.
-All the other symmetrical and rotational polyominoes, and fixed polyominoes are all used using the same generic function.
-We only have, for each configuration, to give methods to generate images of the point (none for fixed, three for $\frac{\pi}{2} rotations, and one for the others), and a method to know whether a point is allowed or not in the canonical form.
+We do not compute all types of symmetrical polyominoes.
+We compute polyominoes symmetrical with regard to the horizontal axis, the vertical axis, the ascending and descending diagonal, and the ones symmetrical with regard to a point.
+Symmetrical polyominoes with regard to the vertical axis (and when the axis is between squares), and with regard to the horizontal axis (when the axis is between squares), that is to say HX and VX polyominoes, are computed using fixed polyominoes of half size.
+All the other symmetrical and rotational polyominoes, and fixed polyominoes are all generated using the same generic function.
+We only have, for each configuration, to give methods to generate images of the point (none for fixed, three for $\frac{\pi}{2}$ rotations, and one for the others), and a method to know whether a point is allowed or not in the canonical form.
 These methods are implemented in the Square interface.
 
 \illustration{rotational_25}{All free polyominoes stable by $\frac{\pi}{2}$ rotation, sized under 25.}
@@ -111,7 +111,13 @@ These methods are implemented in the Square interface.
 
 \subsection{Exact cover and the dancing links algorithm}
 
+We started to solve the exact cover problem by randomly choosing the first element to cover. Then, we limited the number of reachable possibilities at every step by carefully choosing the first element to cover\footnote{We choose the first element such that the number of subsets containing this element is minimal} which sped up the algorithm. At first we were returning all the covers found by the algorithm even though some of them were not exact covers. To improve that, we checked the exactness of every cover returned and finally chose to stop at the first exact cover met for efficiency reasons. The class ExactCover also contains useful functions to manipulate matrices. 
+
+However this algorithm was still far too slow for solving exact cover problems, hence we implemented the dancing links structure. This structure allowed us to solve larger instances of the exact cover problem. As well as for the first algorithm, we chose to stop once a solution is found to improve the efficiency.
+
+
+
 \subsection{From the polyomino tiling problem to exact cover}
-Test
+
 
 \end{document}
