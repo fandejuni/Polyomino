@@ -115,18 +115,4 @@ public class Test {
         t.solve();
     }
 
-    static public void tiling4(){
-		int[][] conf = new int[][]{
-			{ 0, 0, 1, 0, 1, 1, 0},
-			{ 1, 0, 0, 1, 0, 0, 1},
-			{ 0, 1, 1, 0, 0, 1, 0},
-			{ 1, 0, 0, 1, 0, 0, 0},
-			{ 0, 1, 0, 0, 0, 0, 1},
-			{ 0, 0, 0, 1, 1, 0, 1},
-		};
-
-		ColumnObject H = DancingLinks.toDancingLinks(conf);
-		System.out.println(DancingLinks.exactCover(H));
-    }
-
 }

@@ -35,7 +35,7 @@ class Main {
         //Test.exactCover3();
         //Test.tiling1();
         //Test.tiling2();
-        Test.tiling3();
+        Test.tiling3(6,4);
 
 
     }
