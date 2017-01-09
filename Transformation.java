@@ -8,9 +8,7 @@ public class Transformation {
     int n;
 
     public void solve() {
-        List<List<List<Integer>>> all = ExactCover.resolve(M);
-        System.out.println(all);
-        List<List<Integer>> r = all.iterator().next();
+        List<List<Integer>> r = ExactCover.resolve(M);
         List<Polyomino> l = new LinkedList<Polyomino>();
 
         for (List<Integer> u : r) {
@@ -24,6 +22,27 @@ public class Transformation {
         }
 
         System.out.println(r);
+        Manipulate.draw_exactly(l, 50);
+
+    }
+    
+    public void solveDL() {
+        //List<List<List<Integer>>> r = DancingLinks.exactCover(DancingLinks.toDancingLinks(M));
+        List<List<Integer>> sol = DancingLinks.exactCover2(DancingLinks.toDancingLinks(M));
+    	//System.out.println(r.size());
+        //List<List<Integer>> sol = r.iterator().next();
+        System.out.println(sol);
+        List<Polyomino> l = new LinkedList<Polyomino>();
+
+        for (List<Integer> u : sol) {
+            Polyomino p = new Polyomino();
+            for (Integer x : u) {
+                if (x <= n)
+                    p.squares.add(anti_which_id.get(x - 1));
+
+            }
+            l.add(p);
+        }
         Manipulate.draw_exactly(l, 50);
 
     }

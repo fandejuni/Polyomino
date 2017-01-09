@@ -2,7 +2,22 @@ import java.util.*;
 
 public class ExactCover {
 	
-	static public List<List<List<Integer>>> resolve(int[][] M) {
+	// Solves the Exact Cover problem with the first algorithm
+	static public List<List<Integer>> resolve(int[][] M) {
+		List<List<List<Integer>>> l = resolve_aux(M);
+		int n = M[0].length;
+		for (List<List<Integer>> P : l) {
+			int counter = 0;
+			for (List<Integer> T : P) {
+				counter += T.size();
+			}
+			if (counter == n) {return P;}
+		} 
+		return new LinkedList<List<Integer>>();
+	}
+	
+	// Returns all the solutions of the Exact Cover problem 
+	static public List<List<List<Integer>>> resolve_aux(int[][] M) {
 		List<List<List<Integer>>> l = new LinkedList<List<List<Integer>>>();
 	
 		int m = M.length;
@@ -20,18 +35,6 @@ public class ExactCover {
 			l.add(new LinkedList<List<Integer>>());
 		}
 		else {
-			/*int a = 0; // x is the index of the column of the first 1 which appears in M 
-			int b = 0;
-			while (M[a][b]!=1) {
-				if (b==n-1) {
-					a++;
-					b=0;
-				}
-				else {
-					b++;
-				}
-			}
-			int x = b;	*/ 
 			int x = 0; // x minimizes the number of sets S containing x
 			int min = m;
 			for (int j = 0; j < n; j++) {
@@ -70,28 +73,18 @@ public class ExactCover {
 						}
 					}
 
-					for (List<List<Integer>> P : resolve(M_star)) {
+					for (List<List<Integer>> P : resolve_aux(M_star)) {
 						P.add(S);
 						l.add(P);
 					}
 				}
 			}
 		}
-/*		for (List<List<Integer>> P : l) {
-			int counter = 0;
-			System.out.println(P);
-			for (List<Integer> T : P) {
-				System.out.println("ok");
-				counter += T.size();
-				System.out.println(T.size());
-			}
-			if (counter != n) {l.remove(P);}
-			System.out.println(n);
-			System.out.println(counter);
-		}*/ // A deplacer !
+
 		return l;
 	}
     
+	// Generates the subsets of [|a,b|] of size k
     static public List<List<Integer>> generateSubsets(int a, int b, int k) {
     	List<List<Integer>> l = new LinkedList<List<Integer>>();
     	if (b-a + 1 < k || a > b) {return l;}
@@ -108,6 +101,7 @@ public class ExactCover {
     	return(l);
     }
     
+    // Generates all subsets of [|1,n|] 
     static public List<List<Integer>> generateAllSubsets(int n) {
     	List<List<Integer>> l = new LinkedList<List<Integer>>();
     	for (int k = 1; k <= n; k++) {
@@ -116,6 +110,7 @@ public class ExactCover {
     	return l;
     }
     
+    // Generates a matrix from a list of list of integers
     static public int[][] generateMatrix(List<List<Integer>> l) {
     	int max = 0;
     	for (List<Integer> S : l) {
@@ -134,7 +129,7 @@ public class ExactCover {
     	return M;
     }
    
-    
+    // Prints a given matrix
     static public void printMatrix(int[][] M) {
     	for (int[] row : M) {
     		for (int j : row) {

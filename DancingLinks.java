@@ -7,6 +7,7 @@ public class DancingLinks {
 		this.H = H;
 	}
 	
+	// Converts a matrix into a ColumnObject
 	public static ColumnObject toDancingLinks(int[][] M) {
 		int m = M.length;
 		int n = M[0].length;
@@ -71,6 +72,7 @@ public class DancingLinks {
 		return H;
 	}
 	
+	// Covers a column
 	public static void coverColumn(ColumnObject x) {
 		x.R.L = x.L;
 		x.L.R = x.R;
@@ -90,6 +92,7 @@ public class DancingLinks {
 		
 	}
 	
+	// Uncovers a column
 	public static void uncoverColumn(ColumnObject x) {
 		x.R.L = x;
 		x.L.R = x;
@@ -109,9 +112,10 @@ public class DancingLinks {
 		
 	}
 	
-	public static List<List<Integer>> exactCover(ColumnObject H) {
-		List<List<Integer>> l = new LinkedList<List<Integer>>();
-		if (H.R == H) {l.add(new LinkedList<Integer>());}
+	// Returns all the solutions the exact cover problem using the DancingLinks structure
+	public static List<List<List<Integer>>> exactCover(ColumnObject H) {
+		List<List<List<Integer>>> l = new LinkedList<List<List<Integer>>>();
+		if (H.R == H) {l.add(new LinkedList<List<Integer>>());}
 		else {
 			ColumnObject var = (ColumnObject) H.R;
 			int min = var.S;
@@ -127,14 +131,18 @@ public class DancingLinks {
 			DataObject t = x.U;
 			while (t != x) {
 				DataObject y = t.L;
+				List<Integer> t_values = new LinkedList<Integer>();
+				t_values.add(Integer.parseInt(x.N));
 				while (y != t) {
 					coverColumn(y.C);
+					t_values.add(Integer.parseInt(y.C.N));
 					y = y.L;
 				}
-				for (List<Integer> P : exactCover(H)) {
-					P.add(Integer.parseInt(t.C.N));
+				for (List<List<Integer>> P : exactCover(H)) {
+					P.add(t_values);
 					l.add(P);
 				}
+
 				y = t.R;
 				while (y != t) {
 					uncoverColumn(y.C);
@@ -147,6 +155,50 @@ public class DancingLinks {
 		return l;
 	}
 
+
+	// Returns a solution of the exact cover problem using the DancingLinks structure
+	public static List<List<Integer>> exactCover2(ColumnObject H) {
+		List<List<List<Integer>>> l = new LinkedList<List<List<Integer>>>();
+		if (H.R == H) {l.add(new LinkedList<List<Integer>>());}
+		else {
+			ColumnObject var = (ColumnObject) H.R;
+			int min = var.S;
+			ColumnObject x = var;
+			while (var != H) {
+				var = (ColumnObject) var.R;
+				if (var.S < min && var.S > 0) {
+					min = var.S;
+					x = var;
+				}
+			}
+			coverColumn(x);
+			DataObject t = x.U;
+			while (t != x) {
+				DataObject y = t.L;
+				List<Integer> t_values = new LinkedList<Integer>();
+				t_values.add(Integer.parseInt(x.N));
+				while (y != t) {
+					coverColumn(y.C);
+					t_values.add(Integer.parseInt(y.C.N));
+					y = y.L;
+				}
+				for (List<List<Integer>> P : exactCover(H)) {
+					P.add(t_values);
+					return P;
+				}
+	
+				y = t.R;
+				while (y != t) {
+					uncoverColumn(y.C);
+					y = y.R;
+				}
+				t = t.U;
+			}
+			uncoverColumn(x.C);
+		}
+		return new LinkedList<List<Integer>>();
+	}
+	
 }
 
 
