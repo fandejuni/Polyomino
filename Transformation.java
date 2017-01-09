@@ -10,7 +10,9 @@ public class Transformation {
     public void solve() {
         System.out.println(which_id);
         System.out.println(anti_which_id);
-        List<List<Integer>> r = ExactCover.resolve(M);
+        List<List<List<Integer>>> all = ExactCover.resolve(M);
+        System.out.println(all);
+        List<List<Integer>> r = all.iterator().next();
         List<Polyomino> l = new LinkedList<Polyomino>();
 
         for (List<Integer> u : r) {
