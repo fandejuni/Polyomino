@@ -147,4 +147,22 @@ public class Test {
         t.solveDL();
     }
 
+    static public void ultimateTest(int n, int k) {
+        List<Polyomino> l = Manipulate.fixed(n, n);
+        //List<Polyomino> l = Manipulate.generic(n, "Fixed");
+        List<List<Polyomino>> solutions = new LinkedList<List<Polyomino>>();
+        for (Polyomino p : l) {
+            Polyomino big = p.clone();
+            big.dilation(k);
+            List<Polyomino> all = new LinkedList<Polyomino>();
+            all.add(p);
+            Transformation t = new Transformation(big, all, true, "reusable");
+            List<Polyomino> soluce = t.solveDL();
+            if (!soluce.isEmpty()) {
+                solutions.add(soluce);
+                System.out.println(solutions.size());
+            }
+        }
+    }
+
 }

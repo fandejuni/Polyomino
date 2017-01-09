@@ -5,7 +5,7 @@ class Main {
 
         List<List<Polyomino>> tout = new LinkedList<List<Polyomino>>();
 
-/*        tout.add(Manipulate.generateAllFixedPolyominoes(4, 3));
+        tout.add(Manipulate.generateAllFixedPolyominoes(4, 3));
         tout.add(Manipulate.generateAllFreePolyominoes(3,3));
         tout.add(Manipulate.generic(7, "Fixed"));
         tout.add(Manipulate.HX_VX(12));
@@ -26,9 +26,10 @@ class Main {
         //Test.tiling1();
         //Test.tiling2();
         //Test.tiling3(6,3);
-        Test.tiling3DL(4,6);
+        //Test.tiling3DL(4,6);
         //Test.tilingRectangle(4,3);
         //Test.tilingRectangleDL(7,3);
+        Test.ultimateTest(8, 4);
 
 
     }
