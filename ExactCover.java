@@ -2,7 +2,20 @@ import java.util.*;
 
 public class ExactCover {
 	
-	static public List<List<List<Integer>>> resolve(int[][] M) {
+	static public List<List<Integer>> resolve(int[][] M) {
+		List<List<List<Integer>>> l = resolve_aux(M);
+		int n = M[0].length;
+		for (List<List<Integer>> P : l) {
+			int counter = 0;
+			for (List<Integer> T : P) {
+				counter += T.size();
+			}
+			if (counter == n) {return P;}
+		} 
+		return new LinkedList<List<Integer>>();
+	}
+	
+	static public List<List<List<Integer>>> resolve_aux(int[][] M) {
 		List<List<List<Integer>>> l = new LinkedList<List<List<Integer>>>();
 	
 		int m = M.length;
@@ -70,25 +83,14 @@ public class ExactCover {
 						}
 					}
 
-					for (List<List<Integer>> P : resolve(M_star)) {
+					for (List<List<Integer>> P : resolve_aux(M_star)) {
 						P.add(S);
 						l.add(P);
 					}
 				}
 			}
 		}
-/*		for (List<List<Integer>> P : l) {
-			int counter = 0;
-			System.out.println(P);
-			for (List<Integer> T : P) {
-				System.out.println("ok");
-				counter += T.size();
-				System.out.println(T.size());
-			}
-			if (counter != n) {l.remove(P);}
-			System.out.println(n);
-			System.out.println(counter);
-		}*/ // A deplacer !
+
 		return l;
 	}
     

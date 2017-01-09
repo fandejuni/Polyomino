@@ -18,24 +18,18 @@ class Main {
         tout.add(Manipulate.generic(25, "R2"));
 
 
-        for (List<Polyomino> all : tout) {
-            for (Polyomino p: all) {
-                p.canonicalForm();
-            }
-            //System.out.println(all);
-            System.out.println(all.size());
-            //Manipulate.draw(all);
-        }
-
-
         //Test.testBasePolyomino();
         //Test.testGenerator(tout);
-        Test.exactCover1();
+        //Test.exactCover1();
         //Test.exactCover2();
         //Test.exactCover3();
+        //Test.dancingLinks1();
+        //Test.dancingLinks2();
         //Test.tiling1();
         //Test.tiling2();
-        Test.tiling3(6,4);
+        //Test.tiling3(5,5);
+        //Test.tilingRectangle(4,3);
+        Test.tilingRectangleDL(6,3);
 
 
     }

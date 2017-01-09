@@ -109,9 +109,9 @@ public class DancingLinks {
 		
 	}
 	
-	public static List<List<Integer>> exactCover(ColumnObject H) {
-		List<List<Integer>> l = new LinkedList<List<Integer>>();
-		if (H.R == H) {l.add(new LinkedList<Integer>());}
+	public static List<List<List<Integer>>> exactCover(ColumnObject H) {
+		List<List<List<Integer>>> l = new LinkedList<List<List<Integer>>>();
+		if (H.R == H) {l.add(new LinkedList<List<Integer>>());}
 		else {
 			ColumnObject var = (ColumnObject) H.R;
 			int min = var.S;
@@ -127,14 +127,18 @@ public class DancingLinks {
 			DataObject t = x.U;
 			while (t != x) {
 				DataObject y = t.L;
+				List<Integer> t_values = new LinkedList<Integer>();
+				t_values.add(Integer.parseInt(x.N));
 				while (y != t) {
 					coverColumn(y.C);
+					t_values.add(Integer.parseInt(y.C.N));
 					y = y.L;
 				}
-				for (List<Integer> P : exactCover(H)) {
-					P.add(Integer.parseInt(t.C.N));
+				for (List<List<Integer>> P : exactCover(H)) {
+					P.add(t_values);
 					l.add(P);
 				}
+
 				y = t.R;
 				while (y != t) {
 					uncoverColumn(y.C);
