@@ -54,7 +54,6 @@ public class ExactCover {
 						}
 					}
 					List<Integer> S = new LinkedList<Integer>();
-					printMatrix(M_star);
 					for (int j = 0; j < n; j++) {
 						if (M_star[i][j]==1) {
 							S.add(j+1);
@@ -77,7 +76,19 @@ public class ExactCover {
 					}
 				}
 			}
-		}		
+		}
+/*		for (List<List<Integer>> P : l) {
+			int counter = 0;
+			System.out.println(P);
+			for (List<Integer> T : P) {
+				System.out.println("ok");
+				counter += T.size();
+				System.out.println(T.size());
+			}
+			if (counter != n) {l.remove(P);}
+			System.out.println(n);
+			System.out.println(counter);
+		}*/ // A deplacer !
 		return l;
 	}
     
