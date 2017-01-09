@@ -27,9 +27,10 @@ public class Transformation {
     }
     
     public void solveDL() {
-        List<List<List<Integer>>> r = DancingLinks.exactCover(DancingLinks.toDancingLinks(M));
-        System.out.println(r.size());
-        List<List<Integer>> sol = r.iterator().next();
+        //List<List<List<Integer>>> r = DancingLinks.exactCover(DancingLinks.toDancingLinks(M));
+        List<List<Integer>> sol = DancingLinks.exactCover2(DancingLinks.toDancingLinks(M));
+    	//System.out.println(r.size());
+        //List<List<Integer>> sol = r.iterator().next();
         System.out.println(sol);
         List<Polyomino> l = new LinkedList<Polyomino>();
 

@@ -91,9 +91,22 @@ public class Test {
     			p.squares.add(a);
     		}
     	}
-		List<Polyomino> l = Manipulate.fixed(1, k);
-        Transformation v = new Transformation(p, l, false, "atMostOnce");
+		List<Polyomino> l = Manipulate.fixed(2, k);
+        Transformation v = new Transformation(p, l, false, "reusable");
         v.solve();
+    }
+    
+    static public void tiling3DL(int n, int k) {
+		Polyomino p = new Polyomino();
+    	for(int i = 0; i < n; i++){
+    		for(int j = 0; j < n; j++){
+				Square a = new Square(i, i/2 + j);
+    			p.squares.add(a);
+    		}
+    	}
+		List<Polyomino> l = Manipulate.fixed(2, k);
+        Transformation v = new Transformation(p, l, false, "atMostOnce");
+        v.solveDL();
     }
     
     static public void dancingLinks1() {
@@ -130,7 +143,7 @@ public class Test {
     
     static public void tilingRectangleDL(int n, int k) {
         Polyomino p = Polyomino.rectangle(n, n);
-        Transformation t = new Transformation(p, Manipulate.fixed(3, k), false, "reusable");
+        Transformation t = new Transformation(p, Manipulate.fixed(2, k), false, "reusable");
         t.solveDL();
     }
 
