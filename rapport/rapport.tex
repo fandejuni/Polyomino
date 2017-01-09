@@ -100,7 +100,7 @@ We do not compute all types of symmetrical polyminoes.
 We compute polyminoes symmetrical with regard to the horizontal axis, the vertical axis, the ascending and descending diagonal, and the ones symmetrical with regard to a point.
 Symmetrical polyominoes with regard to the vertical axis (and when the axis is between squares), and with regard to the horizontal axis (when the axis is between squares), that is to say HX and VX polyminoes, are computed using fixed polyminoes of half size.
 All the other symmetrical and rotational polyominoes, and fixed polyominoes are all used using the same generic function.
-We only have, for each configuration, to give methods to generate images of the point (none for fixed, three for $\frac{\pi}{2} rotations, and one for the others), and a method to know whether a point is allowed or not in the canonical form.
+We only have, for each configuration, to give methods to generate images of the point (none for fixed, three for $\frac{\pi}{2}$ rotations, and one for the others), and a method to know whether a point is allowed or not in the canonical form.
 These methods are implemented in the Square interface.
 
 \illustration{rotational_25}{All free polyominoes stable by $\frac{\pi}{2}$ rotation, sized under 25.}
@@ -112,6 +112,21 @@ These methods are implemented in the Square interface.
 \subsection{Exact cover and the dancing links algorithm}
 
 \subsection{From the polyomino tiling problem to exact cover}
-Test
+
+We have to convert a polyomino tiling problem to an exact cover one.
+We first give a unique number to each square of the polyomino we want to cover.
+We then generate every translation, rotation (if asked) and symmetries (if asked also) of every polyomino from the collection, which is included in the big polyomino.
+We then convert those instances into lines of $0$ and $1$, where each $1$ represents the fact that this instance covers the square numbered.
+We can now use $ExactCover$ to solve our problem, and here it can reuse every little polyomino how he wants.
+
+If we wanna use little polyominoes at most once each, we add columns at the end, the number of the little polyminoes we have, let's say $n$.
+We give each little polyomino a number $i$.
+For each instance created from this polyomino, we add an $1$ at the $n + i$ column.
+But we have now to use every little polyomino exactly once.
+If we want to be able to not use every available polyomino, we only have to add lines full of $0$s, and to put an $1$ only at the id of the polyomino.
+A result polyominoes of size 8 which can cover their own dilate 4 times, with every instance of their rotations or symmetries, is shown on figure \ref{fig:dilatation}.
+
+
+\illustration{dilatation}{The 67 polyominoes of size 8 which can cover their own dilate (4 times).}
 
 \end{document}

@@ -43,9 +43,9 @@ public class Transformation {
             }
             l.add(p);
         }
-        if (!l.isEmpty()) {
-            Manipulate.draw_exactly(l, 50);
-        }
+        //if (!l.isEmpty()) {
+            //Manipulate.draw_exactly(l, 50);
+        //}
         return l;
 
     }

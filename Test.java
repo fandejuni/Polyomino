@@ -163,6 +163,7 @@ public class Test {
                 System.out.println(solutions.size());
             }
         }
+        Manipulate.bigDraw(solutions);
     }
 
 }

@@ -262,4 +262,62 @@ public class Manipulate {
 		new Image2dViewer(img);
     }
 
+    public static Square dimensions(List<Polyomino> l) {
+        Square dimensions = new Square(0, 0);
+        for (Polyomino p : l) {
+            Square dim = p.getCoordinates()[1];
+            dimensions.x = Math.max(dimensions.x, dim.x);
+            dimensions.y = Math.max(dimensions.y, dim.y);
+        }
+        return dimensions;
+    }
+
+    public static void bigDraw(List<List<Polyomino>> l) {
+    	Collections.sort(l, new Comparator<List<Polyomino>>(){
+    		  public int compare(List<Polyomino> l1, List<Polyomino> l2){
+                  return Manipulate.dimensions(l1).y-Manipulate.dimensions(l2).y;
+    		  }
+    		});
+        Set<Square> the_squares = new HashSet<Square>();
+        int offsetH = 0;
+        int offsetV = 0;
+        int max = 0;
+        int current;
+        int xmax = 1920 / Polyomino.width;
+        for (List<Polyomino> puzzle : l) {
+        	current = dimensions(puzzle).y;
+        	if (current > max) {max = current;}
+            Square dimensions = dimensions(puzzle);
+            if (offsetH + dimensions.x + 2 > xmax) {
+            	offsetH = 0;
+            	offsetV += max + 2;
+            	max = 0;
+            }
+
+            for (Polyomino p : puzzle) {
+                p.translation(new Square(offsetH, offsetV));
+                Color color = Utilities.randomColor();
+                for (Square s : p.squares) {
+                    s.color = color;
+                    the_squares.add(s);
+                }
+            }
+
+            offsetH += dimensions.x + 5;
+
+       }
+        Image2d img = new Image2d(1000, 500);
+        for (Square corner : the_squares)
+		{
+            int x1 = (corner.x + 1) * Polyomino.width;
+            int x2 = (corner.x + 2) * Polyomino.width;
+            int y1 = (corner.y + 1) * Polyomino.width;
+            int y2 = (corner.y + 2) * Polyomino.width;
+            int[] the_x = new int[]{x1, x1, x2, x2};
+            int[] the_y = new int[]{y1, y2, y2, y1};
+			img.addPolygon(the_x, the_y, corner.color);
+		}
+		new Image2dViewer(img);
+    }
+
 }
