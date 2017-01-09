@@ -3,7 +3,6 @@
 \usepackage[utf8]{inputenc}
 \usepackage{graphicx}
 \usepackage{geometry}
-\usepackage{multicol}
 \usepackage{float}
 
 \geometry{a4paper,total={170mm,257mm},left=20mm,top=20mm,}
@@ -43,40 +42,40 @@ In order to efficiently represent and manipulate polyominoes, which are represen
 A square has unsurprisingly two main attributes, $(int) x$ and $(int) y$.
 It also has a third attribute, $(Color) color$, which is only used to efficiently draw polyominoes.
 
-In order to be able to use efficient data structures such as sets for polyominoes, we overrode $equals$ and $hashCode$\footnote{The hashcode we implemented wasn’t really efficient, because it returns everytime 1.
+In order to be able to use efficient data structures such as sets for polyominoes, we overrode $equals$ and $hashCode$\footnote{The hashcode we implemented is not really efficient, because it returns 1 everytime.
 We had an issue with another hashcode method we previously implemented, two polyominoes with the same set of squares could be in a set.
-It is of course possible, with more time, to handle this issue by understanding where in our code we change a square when it’s already in a polyomino which is itself in a set.}
+It is of course possible, with more time, to handle this issue by understanding where in our code we change a square when it is already in a polyomino which is itself in a set.}
  methods: two squares are equal if and only if their coordinates are the same.
-We also have generic methods we’ll discuss when talking about generating symmmetrical
+We also have generic methods we will discuss when talking about generating symmmetrical
 and rotationnal polyominoes.
 
 Eventually, we have methods to manipulate squares of polyominoes, such as translations of squares, dilatation of one square (ie. translation), reflections, rotations...
 These methods don’t make sense for a square alone, but they make sense when thinking about a polyomino.
-We use squares as square, of course, but also as vectors (of translation for instance), and even for storing data such as dimensions (width and height).
+We use squares as squares, of course, but also as vectors (of translation for instance), and even for storing data such as dimensions (width and height).
 
 
 \subsection{The Polyomino class}
 
 A polyomino is represented by a set of squares, which is his main attribute.
-As for the Square class, we also have to override $equals$ and $hashCode$: two polyominoes are equal if and only if their squares are the same, the hashCode is the hashCode of the set\footnote{Since the hashCode of a set if the sum of the hashCode of his elements, it's in our case the size of the set.}.
+As well as for the Square class, we had to override $equals$ and $hashCode$: two polyominoes are equal if and only if their squares are the same, the hashCode is the hashCode of the set\footnote{Since the hashCode of a set if the sum of the hashCodes of his elements, it is in our case the size of the set.}.
 
-A polyomino has a lot of methods to be manipulated, such as translation, dilatation, $\frac{\pi}{2}$ rotation... which are related to the ones previously defined for the squares.
+There are a lot of methods for manipulating polyominoes, such as translation, dilatation, $\frac{\pi}{2}$ rotation... which are related to the ones previously defined for the squares.
 We can also create an empty polyomino, or create a polyomino from a $String$.
 We can check whether a polyomino is included in another one, whether a polyomino is a polyomino (\foreign{ie.} its squares are connected).
 
 \subsection{Manipulate polyominoes}
 
-The Manipulate class contained the useful functions for creating polyominoes from a file, drawing a list of polyominoes side by side (on figure \ref{fig:INF421} for instance), or draw the polyominoes with their given coordinates, to see solutions of tiling problems.
+The Manipulate class contains the useful functions for creating polyominoes from a file, drawing a list of polyominoes side by side (on figure \ref{fig:INF421} for instance), or drawing the polyominoes with their given coordinates, to see solutions of tiling problems.
 
 \illustration{INF421}{Six random polyominoes with random colors, side to side.}
 
-It also contains the functions we created to generate fixed and free polyminoes in a given rectangle, Redelmeier's function to generate fixed polyominoes of a given size, and a bunch of functions to generate symmetric and rotational polyominoes.
+It also contains the functions we created to generate fixed and free polyminoes in a given rectangle, Redelmeier's function to generate fixed polyominoes of a given size, and a bunch of functions to generate symmetrical and rotational polyominoes.
 
 
 
 \section{Generating polyominoes}
 
-\subsection{A naive generator for fixed and fixed polyominoes}
+\subsection{A naive generator for fixed and free polyominoes}
 
 To generate all the fixed polyminoes in a given area, we simply proceed in a few simple steps.
 First of all, we generate every possible combination of squares in the given area: for each square in the area, we add it or not to the already existing set of squares.
