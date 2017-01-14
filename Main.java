@@ -27,7 +27,6 @@ class Main {
         //Test.tiling2();
         //Test.tiling3(6,3);
         //Test.tiling3DL(4,8);
-        //Test.tiling3DL(4,6);
         //Test.tilingRectangle(4,3);
         //Test.tilingRectangleDL(7,3);
         //Test.ultimateTest(8, 4);
